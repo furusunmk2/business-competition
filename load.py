@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 
 # 画像ファイルのパス
 current_directory = os.getcwd()
-image_filename = "mnt/data/image.png"
+image_filename = "mnt/data/image2.png"
 image_path = os.path.join(current_directory, image_filename)
 
 # ファイルが存在するか確認する
@@ -60,9 +60,48 @@ else:
                     # 輪郭を描画
                     cv2.drawContours(contour_image, [contour], -1, (0, 255, 0), 2)
 
+        # 白線の範囲を定義（HSV）
+        lower_white = np.array([0, 0, 240])
+        upper_white = np.array([180, 10, 255])
+
+        # 白線領域のマスクを作成
+        white_mask = cv2.inRange(hsv_image, lower_white, upper_white)
+
+        # 白線を検出
+        edges = cv2.Canny(white_mask, 50, 150)
+
+        # ハフ変換を用いて直線を検出
+        lines = cv2.HoughLinesP(edges, 1, np.pi/180, 50, maxLineGap=50)
+        road_image = image.copy()
+        if lines is not None:
+            for line in lines:
+                x1, y1, x2, y2 = line[0]
+                cv2.line(road_image, (x1, y1), (x2, y2), (0, 255, 255), 2)
+
+        # 道路部分の色を変える
+        # グレーの範囲を定義（HSV）
+        lower_gray = np.array([0, 0, 100])
+        upper_gray = np.array([180, 40, 210])
+
+        # グレー領域のマスクを作成
+        gray_mask = cv2.inRange(hsv_image, lower_gray, upper_gray)
+        
+        # 白線の間のグレー部分を抽出
+        
+
+        # グレー領域の輪郭を検出
+        gray_contours, _ = cv2.findContours(gray_mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+
+        # 小さい領域を除外して赤色に変更
+        min_area = 30000  # 最小面積の閾値
+        for contour in gray_contours:
+            area = cv2.contourArea(contour)
+            if area > min_area:
+                cv2.drawContours(road_image, [contour], -1, (0, 0, 255), -1)
+
         # 結果を表示
-        plt.imshow(cv2.cvtColor(contour_image, cv2.COLOR_BGR2RGB))
-        plt.title("Detected Stop Signs")
+        plt.imshow(cv2.cvtColor(road_image, cv2.COLOR_BGR2RGB))
+        plt.title("Road with White Lines and Red Colored Gray Area")
         plt.show()
 
     except Exception as e:
