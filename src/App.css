@@ -1,204 +1,124 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 /* 全体のスタイル */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f8ff; /* 淡い青 */
+  font-family: 'Arial', sans-serif;
+  background-color: #f8f5f0; /* ベージュ */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* コンテナのスタイル */
+.container {
+  display: flex;
+  flex: 1;
+  width: 100%;
 }
 
 /* ヘッダーのスタイル */
 header {
-  background-color: #ffcccb; /* 淡い赤 */
+  background-color: #c5d28c; /* グレージュ */
   padding: 20px;
   text-align: center;
-  border-bottom: 2px solid #ffb6c1; /* ピンクのボーダー */
+  width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
   margin: 0;
   color: #333;
+  font-size: 24px;
 }
 
 header p {
   margin: 5px 0 0;
   color: #666;
-}
-
-/* メインコンテンツのスタイル */
-main {
-  padding: 20px;
-}
-
-main h2 {
-  color: #333;
-}
-
-button {
-  background-color: #add8e6; /* 淡い青 */
-  border: none;
-  color: white;
-  padding: 15px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 16px;
-  margin: 10px 2px;
-  border-radius: 10px;
-  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #87ceeb; /* 淡いスカイブルー */
-}
-
-a {
-  text-decoration: none;
-}
-
-/* フッターのスタイル */
-footer {
-  background-color: #98fb98; /* 淡い緑 */
-  padding: 10px;
-  text-align: center;
-  border-top: 2px solid #90ee90; /* ライトグリーンのボーダー */
-}
-
-footer p {
-  margin: 0;
-  color: #333;
-}
-
-/* リンクのスタイル */
-a button {
-  color: #333;
-}
-
-a button:hover {
-  color: white;
-}
-/* 全体のスタイル */
-body {
-  font-family: 'Comic Sans MS', 'Comic Sans', cursive;
-  background-color: #f9f9f9; /* 淡いグレー */
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ヘッダーのスタイル */
-header {
-  background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); /* ピンクのグラデーション */
+/* メニューのスタイル */
+.menu {
+  width: 200px;
+  background-color: #f0e6d6; /* ベージュ */
   padding: 20px;
-  text-align: center;
-  border-bottom: 4px solid #ffb6c1; /* ピンクのボーダー */
+  border-right: 2px solid #ddd;
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-header h1 {
-  margin: 0;
-  color: #fff;
-  text-shadow: 2px 2px #ff6f91;
-}
-
-header p {
-  margin: 5px 0 0;
-  color: #fff;
-  text-shadow: 1px 1px #ff6f91;
-}
-
-/* メインコンテンツのスタイル */
-main {
-  padding: 20px;
-  text-align: center;
-}
-
-main h2 {
+.menu h2 {
   color: #333;
   margin-bottom: 20px;
+  font-size: 20px;
+  text-align: center;
 }
 
-button {
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); /* オレンジのグラデーション */
+.menu a {
+  display: block;
+  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.menu button {
+  background-color: #b5651d; /* ブラウン */
   border: none;
   color: white;
   padding: 15px 20px;
-  text-align: center;
+  text-align: left;
   text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 10px 2px;
-  border-radius: 20px;
+  display: block;
+  font-size: 18px;
+  margin: 10px 0;
+  border-radius: 8px;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
-button:hover {
-  background: linear-gradient(135deg, #fcb69f 0%, #ffecd2 100%); /* 反転オレンジのグラデーション */
-  transform: scale(1.05);
+.menu button:hover {
+  background-color: #8b4513; /* ダークブラウン */
+  transform: translateX(10px);
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-a {
-  text-decoration: none;
+/* メインコンテンツのスタイル */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f8f5f0; /* ベージュ */
+  margin-left: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-content h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.main-content p {
+  color: #666;
+  font-size: 16px;
 }
 
 /* フッターのスタイル */
 footer {
-  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); /* ブルーのグラデーション */
+  background-color: #d2b48c; /* グレージュ */
   padding: 10px;
   text-align: center;
-  border-top: 4px solid #90ee90; /* ライトグリーンのボーダー */
-}
-
-footer p {
-  margin: 0;
-  color: #fff;
-  text-shadow: 1px 1px #6495ed;
-}
-
-/* リンクのスタイル */
-a button {
-  color: #333;
-}
-
-a button:hover {
-  color: white;
+  border-top: 2px solid #b5651d; /* ブラウン */
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  position: fixed;
+  bottom: 0;
 }
