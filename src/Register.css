@@ -1,0 +1,41 @@
+.dq-container {
+    background-color: black;
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 8px;
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+  }
+  
+  .dq-title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .dq-input {
+    margin-bottom: 20px;
+    background-color: black;
+    border: 2px solid white;
+  }
+  
+  .dq-input .MuiInputBase-input {
+    color: white;
+  }
+  
+  .dq-input-label {
+    color: white;
+  }
+  
+  .dq-button {
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+    padding: 10px 0;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+  }
+  
+  .dq-button:hover {
+    background-color: grey;
+  }
+  

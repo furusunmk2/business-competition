@@ -1,5 +1,4 @@
-// index.js
-
+// IndexComponent.js
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -42,7 +41,7 @@ function IndexComponent() {
         <Routes>
           <Route path="/" element={<TopPage loggedIn={loggedIn} handleLogout={handleLogout} handleLogin={handleLogin} setUsername={setUsername} setPassword={setPassword} />} />
           <Route path="/app/*" element={<App loggedIn={loggedIn} handleLogout={handleLogout} handleLogin={handleLogin} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/register" element={<Register setUsername={setUsername} setPassword={setPassword} />} />
         </Routes>
       </Router>
     </React.StrictMode>
