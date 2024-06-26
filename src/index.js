@@ -1,4 +1,6 @@
 // index.js
+// index.js
+// index.js
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
@@ -9,6 +11,8 @@ import TopPage from './TopPage';
 import Register from './Register';
 import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
+import { ThemeProvider } from '@mui/material/styles';
+import theme from './theme';
 
 function IndexComponent() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -17,8 +21,10 @@ function IndexComponent() {
   const [userLists, setUserLists] = useState({});
 
   const handleLogin = async () => {
+    console.log("handleLogin called");
     try {
       const response = await axios.post('http://localhost:5000/login', { username, password });
+      console.log('Login response:', response.data);
       if (response.status === 200) {
         setLoggedIn(true);
         if (!userLists[username]) {
@@ -26,6 +32,7 @@ function IndexComponent() {
         }
       }
     } catch (error) {
+      console.error('Login error:', error);
       alert('Invalid username or password');
     }
   };
@@ -38,13 +45,15 @@ function IndexComponent() {
 
   return (
     <React.StrictMode>
-      <Router>
-        <Routes>
-          <Route path="/" element={<TopPage loggedIn={loggedIn} handleLogout={handleLogout} handleLogin={handleLogin} setUsername={setUsername} setPassword={setPassword} />} />
-          <Route path="/app/*" element={<App loggedIn={loggedIn} handleLogout={handleLogout} handleLogin={handleLogin} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </Router>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<TopPage loggedIn={loggedIn} handleLogout={handleLogout} handleLogin={handleLogin} setLoggedIn={setLoggedIn} setUsername={setUsername} setPassword={setPassword} />} />
+            <Route path="/app/*" element={<App loggedIn={loggedIn} handleLogout={handleLogout} handleLogin={handleLogin} setLoggedIn={setLoggedIn} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />} />
+            <Route path="/register" element={<Register setUsername={setUsername} setPassword={setPassword} />} />
+          </Routes>
+        </Router>
+      </ThemeProvider>
     </React.StrictMode>
   );
 }

@@ -1,9 +1,10 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Toolbar, Typography , IconButton} from '@mui/material';
 import { styled } from '@mui/system';
+import { AccountCircle } from '@mui/icons-material';
 
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
+  zIndex: theme.zIndex.drawer + 1 || 1300,
   backgroundColor: theme.palette.primary.main,
 }));
 
@@ -14,7 +15,7 @@ const StyledToolbar = styled(Toolbar)({
 });
 
 const HeaderContainer = styled('header')({
-  backgroundColor: '#F0F0D0', 
+  backgroundColor: '#f0f0d0',
   color: 'black',
   padding: '10px 0',
   textAlign: 'center',
@@ -23,15 +24,21 @@ const HeaderContainer = styled('header')({
   width: '100%',
 });
 
+const Title = styled(Typography)({
+  flexGrow: 1,
+  textAlign: 'center', // 追加
+});
 
-const Header = () => {
+const Header = ({ loggedIn, handleLogout,username}) => {
   return (
     <HeaderContainer>
       <StyledAppBar position="fixed">
         <StyledToolbar>
-          <Typography variant="h6" noWrap>
-          Disaster Master
-          </Typography>
+          <IconButton edge="start" onClick={handleLogout}  aria-label="account" style={{ color:'#000000' }}>
+            <AccountCircle />
+          </IconButton>
+
+          <Title variant="h6">Disaster Master</Title>
         </StyledToolbar>
       </StyledAppBar>
     </HeaderContainer>
@@ -39,3 +46,14 @@ const Header = () => {
 };
 
 export default Header;
+
+
+
+
+
+
+
+
+
+
+

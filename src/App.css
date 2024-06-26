@@ -18,12 +18,52 @@ body {
     flex-grow: 1;
   }
   
-  .footer {
-    background-color: #060f3e;
-    color: white;
-    text-align: center;
-    padding: 1em;
-  }
+/* App.css */
+
+/* App.css */
+/* App.css */
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+header {
+  flex-shrink: 0;
+}
+
+.main-container {
+  display: flex;
+  flex-grow: 1;
+  padding: 20px;
+}
+
+.main-content {
+  margin-top: 50px;
+  margin-left: 90px;
+  width: 100%;
+  padding: 20px;
+}
+
+.menu {
+  
+  width: 200px;
+  background-color: #f5f5dc;
+  padding: 20px;
+  flex-shrink: 0;
+  height: calc(100vh - 60px); /* 60pxはヘッダーの高さを想定 */
+  position: fixed; /* メニューを固定 */
+  top: 60px; /* ヘッダーの下に配置 */
+  left: 0;
+}
+
+
+
+footer {
+  flex-shrink: 0;
+}
+
   
   .overlay {
     position: fixed;
@@ -45,6 +85,7 @@ body {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     z-index: 1001;
   }
+  
   @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 body {

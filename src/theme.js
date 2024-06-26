@@ -1,21 +1,25 @@
 // theme.js
+// theme.js
 
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#d48c2b', // グレージュ
+      main: '#e6ffeb',
     },
     secondary: {
-      main: '#b5651d', // ブラウン
+      main: '#F5F5DC',
     },
     background: {
-      default: '#f8f5f0', // ベージュ
+      default: '#F5F5DC',
+    },
+    drawer: {
+      main: '#333',
     },
   },
   typography: {
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: '"PixelMplus", "Press Start 2P", cursive',
   },
 });
 

@@ -1,18 +1,21 @@
 // Register.js
 
+
+
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography } from '@mui/material';
+import { TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
-import './Register.css'; // スタイルシートをインポート
+import './Register.css';
 
 const Register = ({ setUsername: setGlobalUsername, setPassword: setGlobalPassword }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegister = async () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/register', { username, password });
-      console.log(response.data); // レスポンスデータをログに出力
+      console.log(response.data);
       if (response.status === 200) {
         alert('Registration successful');
         setGlobalUsername(username);
@@ -21,7 +24,7 @@ const Register = ({ setUsername: setGlobalUsername, setPassword: setGlobalPasswo
         alert(`Registration failed: ${response.data.message}`);
       }
     } catch (error) {
-      console.error(error); // エラーデータをログに出力
+      console.error(error);
       if (error.response) {
         alert(`Registration failed: ${error.response.data.message}`);
       } else {
@@ -31,18 +34,17 @@ const Register = ({ setUsername: setGlobalUsername, setPassword: setGlobalPasswo
   };
 
   return (
-    <Container component="main" maxWidth="xs" className="dq-container">
+    <div className="dq-modal-content">
       <Typography component="h1" variant="h5" className="dq-title">
-        新規登録
+        冒険者になる
       </Typography>
-      <form>
+      <form onSubmit={handleRegister}>
         <TextField
           variant="outlined"
           margin="normal"
           required
           fullWidth
           id="username"
-          label="ユーザー名"
           name="username"
           autoComplete="username"
           autoFocus
@@ -56,7 +58,6 @@ const Register = ({ setUsername: setGlobalUsername, setPassword: setGlobalPasswo
           required
           fullWidth
           name="password"
-          label="パスワード"
           type="password"
           id="password"
           autoComplete="current-password"
@@ -65,17 +66,18 @@ const Register = ({ setUsername: setGlobalUsername, setPassword: setGlobalPasswo
           InputLabelProps={{ className: 'dq-input-label' }}
         />
         <Button
+          type="submit"
           fullWidth
           variant="contained"
           color="primary"
           className="dq-button"
-          onClick={handleRegister}
         >
-          登録
+          登録する
         </Button>
       </form>
-    </Container>
+    </div>
   );
 };
 
 export default Register;
+

@@ -1,66 +1,71 @@
-import React from 'react';
-import { List, ListItem, ListItemText } from '@mui/material';
-import { Link } from 'react-router-dom';
-import { styled } from '@mui/system';
+// Menu.js
 
-const drawerWidth = 240;
+// Menu.js
+// Menu.js
+// Menu.js
 
-const StyledDrawer = styled('div')(({ theme }) => ({
-  width: drawerWidth,
-  flexShrink: 0,
-  backgroundColor: theme.palette.background.default,
-  '& .MuiDrawer-paper': {
-    width: drawerWidth,
-    boxSizing: 'border-box',
-    backgroundColor: theme.palette.background.default,
-  },
-}));
+// Menu.js
+// Menu.js
 
-const StyledList = styled(List)({
-  padding: '20px',
-  '& .MuiListItem-root': {
-    marginBottom: '10px',
-    '& button': {
-      backgroundColor: '#D2B48C', // ベージュ
-      color: 'white',
-      padding: '15px 20px',
-      borderRadius: '8px',
-      transition: 'all 0.3s ease',
-      boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-      width: '100%',
-      '&:hover': {
-        backgroundColor: '#A0522D', // セピア
-        transform: 'translateX(10px)',
-        boxShadow: '0 6px 8px rgba(0, 0, 0, 0.2)',
-      },
-    },
-  },
-});
+import React, { useState } from 'react';
+import { Drawer, List, ListItem, ListItemText, IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import MenuIcon from '@mui/icons-material/Menu';
 
 const Menu = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDrawer = (open) => (event) => {
+    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+
+    }
+    setIsOpen(open);
+  };
+
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
   return (
-    <StyledDrawer>
-      <StyledList>
-        <ListItem style={{color:"#e6ffeb"}}>
+
+    <div>
+      <IconButton
+        edge="start"
+        color="inherit"
+        aria-label="menu"
+        margi
+        onClick={toggleDrawer(true)}
+        style={{ marginTop: '50px' }} 
+
+      >
+        <MenuIcon />
+      </IconButton>
+      <Drawer
+        anchor="left"
+        open={isOpen}
+        onClose={toggleDrawer(false)}
+      >
+        <List onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)} style={{ marginTop: '50px' }} >
+        <ListItem button onClick={() => handleNavigation('/app/learning')}>
           <ListItemText primary="学習" />
         </ListItem>
-        <ListItem button component={Link} to="/learning">
-          <ListItemText primary="学習" />
-        </ListItem>
-        <ListItem button component={Link} to="/quiz">
+        <ListItem button onClick={() => handleNavigation('/app/quiz')}>
           <ListItemText primary="クイズ" />
         </ListItem>
-        <ListItem button component={Link} to="/simulation">
+        <ListItem button onClick={() => handleNavigation('/app/simulation')}>
           <ListItemText primary="シミュレーション" />
         </ListItem>
-        <ListItem button component={Link} to="/ai">
+        <ListItem button onClick={() => handleNavigation('/app/ai')}>
           <ListItemText primary="AI画像分析" />
         </ListItem>
-        <ListItem button component={Link} to="/config">
+        <ListItem button onClick={() => handleNavigation('/app/config')}>
           <ListItemText primary="設定" />
         </ListItem>
-      </StyledList>
-    </StyledDrawer>
+        </List>
+      </Drawer>
+    </div>
   );
 };
 
