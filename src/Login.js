@@ -1,22 +1,21 @@
 // Login.js
 
 
-
 import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 function Login({ setLoggedIn }) {
-  const [username, setUsername] = useState('');
+  const [loginInput, setLoginInput] = useState(''); // Combine username and email
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   const handleLocalLogin = async () => {
-    console.log('Login attempt:', { username, password }); // ログを追加
+    console.log('Login attempt:', { loginInput, password }); // ログを追加
     try {
-      const response = await axios.post('http://localhost:5000/login', { username, password });
+      const response = await axios.post('http://localhost:3001/login', { loginInput, password });
       if (response.data && response.status === 200) {
         setLoggedIn(true);
         navigate('/app');
@@ -35,10 +34,10 @@ function Login({ setLoggedIn }) {
         ログイン
       </Typography>
       <TextField
-        label="ユーザー名"
+        label="ユーザー名 or Email"
         variant="outlined"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
+        value={loginInput}
+        onChange={(e) => setLoginInput(e.target.value)}
         style={{ margin: '10px 0' }}
         fullWidth
       />
