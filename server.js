@@ -22,7 +22,7 @@ db.connect((err) => {
   console.log("Connected to database");
 });
 
-// ログインエンドポイント
+
 app.post('/login', (req, res) => {
   const { loginInput, password } = req.body;
   console.log('Login attempt:', req.body); // ログを追加
@@ -59,7 +59,6 @@ app.post('/login', (req, res) => {
   });
 });
 
-// 登録エンドポイント
 app.post('/register', (req, res) => {
   const { username, password, email, nickname } = req.body;
   const checkUserSql = 'SELECT * FROM users WHERE username = ?';
