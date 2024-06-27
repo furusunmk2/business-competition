@@ -7,19 +7,24 @@ import { TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
 import './Register.css';
 
-const Register = ({ setUsername: setGlobalUsername, setPassword: setGlobalPassword }) => {
+const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, setPassword: setGlobalPassword,setNickname: setGlobalNickname}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [email, setEmail] = useState('');
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/register', { username, password });
+      const response = await axios.post('http://localhost:3001/register', { username, email, password, nickname});
       console.log(response.data);
       if (response.status === 200) {
         alert('Registration successful');
         setGlobalUsername(username);
+        setGlobalEmail(email);
         setGlobalPassword(password);
+        setGlobalNickname(nickname);
+
       } else {
         alert(`Registration failed: ${response.data.message}`);
       }
@@ -62,6 +67,33 @@ const Register = ({ setUsername: setGlobalUsername, setPassword: setGlobalPasswo
           id="password"
           autoComplete="current-password"
           onChange={(e) => setPassword(e.target.value)}
+          className="dq-input"
+          InputLabelProps={{ className: 'dq-input-label' }}
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="email"
+          type="email"
+          id="email"
+          autoComplete="email"
+          onChange={(e) => setEmail(e.target.value)}
+          className="dq-input"
+          InputLabelProps={{ className: 'dq-input-label' }}
+        />
+
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="nickname"
+          type="nickname"
+          id="nickname"
+          autoComplete="current-password"
+          onChange={(e) => setNickname(e.target.value)}
           className="dq-input"
           InputLabelProps={{ className: 'dq-input-label' }}
         />

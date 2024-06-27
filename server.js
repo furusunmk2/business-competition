@@ -3,12 +3,24 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+const mysql2 = require("mysql2");
+const bcrypt = require("bcrypt")
 const app = express();
-const port = 5000;
+const port = 3001;
 
 app.use(bodyParser.json());
 app.use(cors());
+
+const db = mysql2.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "",
+  database: "disaster_master",
+}) ;
+db.connect((err)=>{
+  if (err) throw err;
+  console.log("Connected to database");
+});
 
 const users = [
   { username: 'user', password: 'password' } // テスト用のユーザー
@@ -29,21 +41,24 @@ app.post('/login', (req, res) => {
 
 
 app.post('/register', (req, res) => {
-  const { username, password } = req.body;
-  console.log('Received register request:', req.body); // ログを追加
-  if (!username || !password) {
-    console.log('Username or password missing');
-    return res.status(400).json({ message: 'Username and password are required' });
-  }
-  const userExists = users.some(u => u.username === username);
-  if (userExists) {
-    console.log('User already exists');
-    return res.status(400).json({ message: 'User already exists' });
-  } else {
-    users.push({ username, password });
-    console.log('User registered successfully:', { username, password });
-    res.status(200).json({ message: 'Registration successful' });
-  }
+  const { username, password, email, nickname } = req.body;
+  const checkUserSql = 'SELECT * FROM users WHERE username = ?';
+  
+  db.query(checkUserSql, [username], (err, result) => {
+      if (err) throw err;
+      if (result.length > 0) {
+          res.status(400).send('Username already exists');
+      } else {
+          bcrypt.hash(password, 10, (err, hash) => {
+              if (err) throw err;
+              const insertUserSql = 'INSERT INTO users (username, password, email, nickname) VALUES (?, ?, ?, ?)';
+              db.query(insertUserSql, [username, hash, email, nickname], (err, result) => {
+                  if (err) throw err;
+                  res.send('User registered');
+              });
+          });
+      }
+  });
 });
 
 app.listen(port, () => {
