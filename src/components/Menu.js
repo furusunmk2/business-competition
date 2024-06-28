@@ -40,7 +40,7 @@ const Menu = () => {
         style={{ marginTop: '50px' }} 
 
       >
-        <MenuIcon />
+        <MenuIcon color='primary'/>
       </IconButton>
       <Drawer
         anchor="left"

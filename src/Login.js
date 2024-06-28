@@ -30,7 +30,7 @@ function Login({ setLoggedIn }) {
 
   return (
     <Container>
-      <Typography variant="h6" style={{ marginTop: '2em', textAlign: 'center' }}>
+      <Typography component="h1" variant="h5" className="dq-title">
         ログイン
       </Typography>
       <TextField
@@ -40,6 +40,9 @@ function Login({ setLoggedIn }) {
         onChange={(e) => setLoginInput(e.target.value)}
         style={{ margin: '10px 0' }}
         fullWidth
+        InputProps={{
+          style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
+        }}
       />
       <TextField
         label="パスワード"
@@ -49,12 +52,19 @@ function Login({ setLoggedIn }) {
         onChange={(e) => setPassword(e.target.value)}
         style={{ margin: '10px 0' }}
         fullWidth
+        InputProps={{
+          style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
+        }}
       />
       <Button
         variant="contained"
         color="primary"
+        fullWidth
         onClick={handleLocalLogin} // 関数名を変更
         style={{ marginTop: '10px' }}
+        InputProps={{
+          style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
+        }}
       >
         ログイン
       </Button>

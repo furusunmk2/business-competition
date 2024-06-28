@@ -15,8 +15,8 @@ const StyledToolbar = styled(Toolbar)({
 });
 
 const HeaderContainer = styled('header')({
-  backgroundColor: '#f0f0d0',
-  color: 'black',
+
+  color: 'white',
   padding: '10px 0',
   textAlign: 'center',
   position: 'fixed',
@@ -34,11 +34,11 @@ const Header = ({ loggedIn, handleLogout,username}) => {
     <HeaderContainer>
       <StyledAppBar position="fixed">
         <StyledToolbar>
-          <IconButton edge="start" onClick={handleLogout}  aria-label="account" style={{ color:'#000000' }}>
+          <IconButton edge="start" onClick={handleLogout}  aria-label="account" color='icon'>
             <AccountCircle />
           </IconButton>
 
-          <Title variant="h6">Disaster Master</Title>
+          <Title variant="h6" color={'#A0937D'} >Disaster Master</Title>
         </StyledToolbar>
       </StyledAppBar>
     </HeaderContainer>

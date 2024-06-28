@@ -12,23 +12,8 @@ import Header from './components/Header';
 import Login from './Login';
 import Register from './Register';
 import './TopPage.css';
+import theme from './theme';
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: "#e6ffeb", // ミントグリーン
-    },
-    secondary: {
-      main: '#F5F5DC', // セピア
-    },
-    background: {
-      default: '#F5F5DC', // ベージュ系
-    },
-  },
-  typography: {
-    fontFamily: '"PixelMplus", "Press Start 2P", cursive',
-  },
-});
 
 const AppContainer = styled('div')({
   display: 'flex',
@@ -49,7 +34,7 @@ const fadeInAndScale = keyframes`
   }
   to {
     opacity: 1;
-    transform: scale(3); // 3倍に拡大
+    transform: scale(2); // 2倍に拡大
   }
 `;
 

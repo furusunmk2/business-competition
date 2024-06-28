@@ -2,20 +2,23 @@
 // theme.js
 
 import { createTheme } from '@mui/material/styles';
-
+// アプリページの色
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#e6ffeb',
+      main: "#EF9C66",
     },
     secondary: {
-      main: '#F5F5DC',
+      main: '#FCDC94',
     },
-    background: {
-      default: '#F5F5DC',
+    menu: {
+      main: '#C8CFA0',
     },
-    drawer: {
-      main: '#333',
+    icon:{
+      main: "#ffffff"
+    },
+    main: {
+      main: '#78ABA8',
     },
   },
   typography: {

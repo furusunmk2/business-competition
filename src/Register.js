@@ -5,7 +5,6 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
-import './Register.css';
 
 const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, setPassword: setGlobalPassword,setNickname: setGlobalNickname}) => {
   const [username, setUsername] = useState('');
@@ -45,6 +44,7 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
       </Typography>
       <form onSubmit={handleRegister}>
         <TextField
+          label="UserName"
           variant="outlined"
           margin="normal"
           required
@@ -55,9 +55,14 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
           autoFocus
           onChange={(e) => setUsername(e.target.value)}
           className="dq-input"
+          color='primary'
           InputLabelProps={{ className: 'dq-input-label' }}
+          InputProps={{
+            style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
+          }}
         />
         <TextField
+          label="Password"
           variant="outlined"
           margin="normal"
           required
@@ -69,8 +74,12 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
           onChange={(e) => setPassword(e.target.value)}
           className="dq-input"
           InputLabelProps={{ className: 'dq-input-label' }}
+          InputProps={{
+            style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
+          }}
         />
         <TextField
+          label="Email"
           variant="outlined"
           margin="normal"
           required
@@ -82,9 +91,13 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
           onChange={(e) => setEmail(e.target.value)}
           className="dq-input"
           InputLabelProps={{ className: 'dq-input-label' }}
+          InputProps={{
+            style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
+          }}
         />
 
         <TextField
+          label="NickName"
           variant="outlined"
           margin="normal"
           required
@@ -96,12 +109,16 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
           onChange={(e) => setNickname(e.target.value)}
           className="dq-input"
           InputLabelProps={{ className: 'dq-input-label' }}
+          InputProps={{
+            style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
+          }}
         />
         <Button
           type="submit"
           fullWidth
           variant="contained"
           color="primary"
+          style={{ marginTop: '10px' }}
           className="dq-button"
         >
           登録する
