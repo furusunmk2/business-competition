@@ -18,8 +18,8 @@ import theme from './theme';
 const AppContainer = styled('div')({
   display: 'flex',
   minHeight: '100vh',
-  backgroundImage: 'url(/backgroundimage.PNG), url(/backgroundimage.JPG)', // 2つの背景画像を指定
-  backgroundSize: '50%, cover', // 1つ目の画像を画面の半分のサイズに、2つ目の画像を全体にカバー
+  backgroundImage: 'url(/toppage.png)', // 2つの背景画像を指定
+  backgroundSize: 'cover', // 1つ目の画像を画面の半分のサイズに、2つ目の画像を全体にカバー
   backgroundPosition: 'bottom left, center', // 1つ目の画像を左下に、2つの画像を中央に配置
   backgroundRepeat: 'no-repeat, no-repeat', // 画像の繰り返しを防止
   flexDirection: 'column',
@@ -39,8 +39,8 @@ const fadeInAndScale = keyframes`
 `;
 
 const Title = styled('h1')({
-  fontSize: '4rem',
-  color: '#FFFFFF', // 白色
+  fontSize: '2rem',
+
   animation: `${fadeInAndScale} 18s ease-in-out`,
   animationFillMode: 'forwards', // アニメーション終了後に最終状態を保持
   cursor: 'pointer', // ポインタを表示
@@ -60,7 +60,7 @@ const modalStyle = {
     width: '50%',
     padding: '20px',
     border: '2px solid rgba(255, 255, 255, 0.8)', // 半透明のボーダー
-    backgroundColor: 'rgba(0, 0, 0, 0.7)', // 半透明の背景色
+    backgroundColor: 'rgba(246, 230, 203, 0.9)', // 半透明の背景色
     color: 'white',
     borderRadius: '10px',
     fontFamily: '"PixelMplus", "Press Start 2P", cursive',
@@ -84,7 +84,7 @@ function TopPage({ loggedIn, handleLogout, handleLogin, setLoggedIn, setUsername
     <ThemeProvider theme={theme}>
       <AppContainer>
         <Header />
-        <Title onClick={handleTitleClick}>Disaster Master</Title>
+        <Title onClick={handleTitleClick}style={{color:"white"}} >Disaster Master</Title>
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
@@ -100,14 +100,14 @@ function TopPage({ loggedIn, handleLogout, handleLogin, setLoggedIn, setUsername
               <Login handleLogin={handleLogin} setLoggedIn={setLoggedIn} setUsername={setUsername} setPassword={setPassword} />
             )
           )}
-          <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '1rem', color: 'white' }}>
+          <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '1rem' }}>
             {isRegister ? (
-              <span>
-                既にアカウントをお持ちですか? <Link href="#" onClick={() => setIsRegister(false)} style={{ color: 'white', textDecoration: 'underline' }}>ログイン</Link>
+              <span style={{ color: 'gray' }}>
+                既にアカウントをお持ちですか? <Link href="#" onClick={() => setIsRegister(false)} style={{ color: 'gray',  textDecoration: 'underline' }}>ログイン</Link>
               </span>
             ) : (
-              <span>
-                アカウントを持っていませんか? <Link href="#" onClick={() => setIsRegister(true)} style={{ color: 'white', textDecoration: 'underline' }}>登録</Link>
+              <span style={{ color: 'gray' }}>
+                アカウントを持っていませんか? <Link href="#" onClick={() => setIsRegister(true)} style={{color: 'gray',  textDecoration: 'underline' }}>登録</Link>
               </span>
             )}
           </Typography>

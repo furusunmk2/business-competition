@@ -1,5 +1,6 @@
 body {
-  font-family: 'PixelMplus', 'Press Start 2P', cursive;
+  font-family: 'PixelMplus', 'Press Start 2P', cursive;  
+  /* 拡大文字 */
 
 }
 
@@ -12,7 +13,7 @@ body {
 
 .dq-input .MuiInputBase-input {
   color: #78ABA8;
-  font-family: 'PixelMplus', 'Press Start 2P', cursive;
+
 }
 
 

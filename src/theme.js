@@ -6,7 +6,7 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#EF9C66",
+      main: "#B6C7AA",
     },
     secondary: {
       main: '#FCDC94',
@@ -15,15 +15,13 @@ const theme = createTheme({
       main: '#C8CFA0',
     },
     icon:{
-      main: "#ffffff"
+      main: "#A0937D"
     },
     main: {
       main: '#78ABA8',
     },
   },
-  typography: {
-    fontFamily: '"PixelMplus", "Press Start 2P", cursive',
-  },
+
 });
 
 export default theme;

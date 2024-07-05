@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography , IconButton} from '@mui/material';
 import { styled } from '@mui/system';
 import { AccountCircle } from '@mui/icons-material';
-
+import './Header.css';
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1 || 1300,
   backgroundColor: theme.palette.primary.main,
@@ -38,7 +38,7 @@ const Header = ({ loggedIn, handleLogout,username}) => {
             <AccountCircle />
           </IconButton>
 
-          <Title variant="h6" color={'#A0937D'} >Disaster Master</Title>
+          <Title variant="h6" color={'#A0937D'} fontFamily={'"Press Start 2P", cursive'}>Disaster Master</Title>
         </StyledToolbar>
       </StyledAppBar>
     </HeaderContainer>

@@ -39,12 +39,12 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
 
   return (
     <div className="dq-modal-content">
-      <Typography component="h1" variant="h5" className="dq-title">
+      <Typography component="h1" variant="h5" className="dq-title" style={{ color: 'gray' }}>
         冒険者になる
       </Typography>
       <form onSubmit={handleRegister}>
         <TextField
-          label="UserName"
+          label="名前"
           variant="outlined"
           margin="normal"
           required
@@ -55,14 +55,14 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
           autoFocus
           onChange={(e) => setUsername(e.target.value)}
           className="dq-input"
-          color='primary'
+          
           InputLabelProps={{ className: 'dq-input-label' }}
           InputProps={{
             style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
           }}
         />
         <TextField
-          label="Password"
+          label="パスワード"
           variant="outlined"
           margin="normal"
           required
@@ -79,7 +79,7 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
           }}
         />
         <TextField
-          label="Email"
+          label="メールアドレス"
           variant="outlined"
           margin="normal"
           required
@@ -97,7 +97,7 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
         />
 
         <TextField
-          label="NickName"
+          label="ニックネーム"
           variant="outlined"
           margin="normal"
           required
@@ -118,7 +118,7 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
           fullWidth
           variant="contained"
           color="primary"
-          style={{ marginTop: '10px' }}
+          style={{ marginTop: '10px' ,color:"white" }}
           className="dq-button"
         >
           登録する

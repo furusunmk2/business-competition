@@ -30,11 +30,11 @@ function Login({ setLoggedIn }) {
 
   return (
     <Container>
-      <Typography component="h1" variant="h5" className="dq-title">
-        ログイン
+      <Typography component="h1" variant="h5" className="dq-title" style={{ color: 'gray' }}>
+          冒険を続ける
       </Typography>
       <TextField
-        label="ユーザー名 or Email"
+        label="ニックネーム or メールアドレス"
         variant="outlined"
         value={loginInput}
         onChange={(e) => setLoginInput(e.target.value)}
@@ -61,9 +61,9 @@ function Login({ setLoggedIn }) {
         color="primary"
         fullWidth
         onClick={handleLocalLogin} // 関数名を変更
-        style={{ marginTop: '10px' }}
+        style={{ marginTop: '10px',color:"white" }}
         InputProps={{
-          style: { backgroundColor: 'white' }, // 入力フィールドの背景を白くする
+          style: { backgroundColor: 'white'}, // 入力フィールドの背景を白くする
         }}
       >
         ログイン
