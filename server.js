@@ -8,7 +8,11 @@ const app = express();
 const port = 3001;
 
 app.use(bodyParser.json());
-app.use(cors());
+// CORS設定
+app.use(cors({
+  origin: 'http://localhost:3000', // フロントエンドのオリジンを指定
+  credentials: true // クレデンシャル（Cookieなど）を含むリクエストを許可
+}));
 
 const db = mysql2.createConnection({
   host: "localhost",
@@ -53,7 +57,7 @@ app.post('/login', (req, res) => {
         res.status(200).json({ message: 'Login successful' });
       } else {
         console.log('Invalid username/email or password: password mismatch');
-        res.status(410).json({ message: 'Invalid username/email or password' });
+        res.status(401).json({ message: 'Invalid username/email or password' });
       }
     });
   });
@@ -91,6 +95,61 @@ app.post('/register', (req, res) => {
     }
   });
 });
+
+//クイズ関連ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+app.get('/api/quiz/:id', (req, res) => {
+  const quizId = req.params.id;
+  const quizQuery = 'SELECT * FROM quizzes WHERE id = ?';
+  const choicesQuery = 'SELECT * FROM quiz_choices WHERE quiz_id = ?';
+
+  db.query(quizQuery, [quizId], (err, quizResults) => {
+    if (err) throw err;
+
+    db.query(choicesQuery, [quizId], (err, choicesResults) => {
+      if (err) throw err;
+
+      res.json({
+        quiz: quizResults[0],
+        choices: choicesResults
+      });
+    });
+  });
+});
+
+app.get('/api/quizzes', (req, res) => {
+  const query = 'SELECT id, title FROM quizzes';
+  
+  db.query(query, (err, results) => {
+    if (err) throw err;
+    res.json(results);
+  });
+});
+
+app.post('/api/answer', (req, res) => {
+  const { userId, quizId, choiceId, isCorrect } = req.body;
+
+  const findAnswerQuery = 'SELECT * FROM user_answers WHERE user_id = ? AND quiz_id = ?';
+  const updateAnswerQuery = 'UPDATE user_answers SET choice_id = ?, answered_at = CURRENT_TIMESTAMP, is_correct = ? WHERE user_id = ? AND quiz_id = ?';
+  const insertAnswerQuery = 'INSERT INTO user_answers (user_id, quiz_id, choice_id, is_correct) VALUES (?, ?, ?, ?)';
+
+  db.query(findAnswerQuery, [userId, quizId], (err, results) => {
+    if (err) throw err;
+
+    if (results.length > 0) {
+      db.query(updateAnswerQuery, [choiceId, isCorrect, userId, quizId], (err) => {
+        if (err) throw err;
+        res.status(200).json({ message: 'Answer updated successfully' });
+      });
+    } else {
+      db.query(insertAnswerQuery, [userId, quizId, choiceId, isCorrect], (err) => {
+        if (err) throw err;
+        res.status(201).json({ message: 'Answer saved successfully' });
+      });
+    }
+  });
+});
+//ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

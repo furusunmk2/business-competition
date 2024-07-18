@@ -44,7 +44,7 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
       </Typography>
       <form onSubmit={handleRegister}>
         <TextField
-          label="名前"
+          label="ユーザーネーム"
           variant="outlined"
           margin="normal"
           required
