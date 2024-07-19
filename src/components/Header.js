@@ -26,7 +26,7 @@ const HeaderContainer = styled('header')({
 
 const Title = styled(Typography)({
   flexGrow: 1,
-  textAlign: 'center', // 追加
+  textAlign: 'center', 
 });
 
 const Header = ({ loggedIn, handleLogout,username}) => {
