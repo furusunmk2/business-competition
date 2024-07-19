@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+axios.defaults.withCredentials = true; // すべてのリクエストでクレデンシャルを含む
+
 
 function Login({ setLoggedIn }) {
   const [loginInput, setLoginInput] = useState(''); // Combine username and email
@@ -15,7 +17,7 @@ function Login({ setLoggedIn }) {
   const handleLocalLogin = async () => {
     console.log('Login attempt:', { loginInput, password }); // ログを追加
     try {
-      const response = await axios.post('http://localhost:3001/login', { loginInput, password });
+      const response = await axios.post('http://localhost:3001/login', { loginInput, password }, { withCredentials: true });
       if (response.data && response.status === 200) {
         setLoggedIn(true);
         navigate('/app');
@@ -23,7 +25,6 @@ function Login({ setLoggedIn }) {
         setMessage('ログイン失敗');
       }
     } catch (error) {
-      console.error('Login error:', error.response ? error.response.data : error.message);
       setMessage('ログイン失敗: ' + (error.response ? error.response.data.message : error.message));
     }
   };
@@ -34,7 +35,7 @@ function Login({ setLoggedIn }) {
           冒険を続ける
       </Typography>
       <TextField
-        label="ニックネーム or メールアドレス"
+        label="ユーザーネーム or メールアドレス"
         variant="outlined"
         value={loginInput}
         onChange={(e) => setLoginInput(e.target.value)}

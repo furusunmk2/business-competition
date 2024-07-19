@@ -20,7 +20,7 @@ function IndexComponent() {
   const handleLogin = async () => {
     console.log("handleLogin called");
     try {
-      const response = await axios.post('http://localhost:5000/login', { username, password });
+      const response = await axios.post('http://localhost:3001/login', { username, password });
       console.log('Login response:', response.data);
       if (response.status === 200) {
         setLoggedIn(true);
