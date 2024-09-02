@@ -27,7 +27,7 @@ const HeaderContainer = styled('header')({
 
 const Title = styled(Typography)({
   flexGrow: 1,
-  textAlign: 'center', // 追加
+  textAlign: 'center', 
 });
 
 const Header = () => {
@@ -47,6 +47,9 @@ const Header = () => {
     </HeaderContainer>
   );
 };
+
+
+
 
 export default Header;
 
