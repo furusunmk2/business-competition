@@ -80,7 +80,6 @@ function TopPage({ loggedIn, handleLogout, handleLogin, setLoggedIn, setUsername
   return (
     <ThemeProvider theme={theme}>
       <AppContainer>
-        <Header />
         <Title onClick={handleTitleClick}style={{color:"white"}} >Disaster Master</Title>
         <Modal
           isOpen={modalIsOpen}

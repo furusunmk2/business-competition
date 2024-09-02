@@ -13,9 +13,18 @@ const Quiz = () => {
   const [quizzes, setQuizzes] = useState([]);
   const [answered, setAnswered] = useState(false);
   const [showList, setShowList] = useState(false);
+  const [userId, setUserId] = useState(null);
 
-  const userId = 1; // 仮のユーザーID
 
+  useEffect(() => {
+    axios.get('http://localhost:3001/check-session')
+      .then(response => {
+        setUserId(response.data.user.id);
+      })
+      .catch(error => {
+        console.error('Error fetching user ID:', error);
+      });
+  }, []);
   
 
   useEffect(() => {
@@ -89,7 +98,7 @@ const Quiz = () => {
 
   return (
     <div>
-      <Button onClick={toggleList}>クイズ一覧</Button>
+      <Button onClick={toggleList}>クリックでクイズ一覧を表示</Button>
       {showList && (
         <List>
           {quizzes.map((q) => (
