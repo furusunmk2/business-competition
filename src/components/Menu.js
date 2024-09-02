@@ -1,12 +1,5 @@
 // Menu.js
 
-// Menu.js
-// Menu.js
-// Menu.js
-
-// Menu.js
-// Menu.js
-
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemText, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -48,6 +41,9 @@ const Menu = () => {
         onClose={toggleDrawer(false)}
       >
         <List onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)} style={{ marginTop: '50px' }} >
+        <ListItem button onClick={() => handleNavigation('/app/home')}>
+          <ListItemText primary="ホーム" />
+        </ListItem>
         <ListItem button onClick={() => handleNavigation('/app/learning')}>
           <ListItemText primary="学習" />
         </ListItem>

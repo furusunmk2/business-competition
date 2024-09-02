@@ -5,6 +5,7 @@ const cors = require('cors');
 const mysql2 = require("mysql2");
 const bcrypt = require("bcrypt");
 const app = express();
+const session = require('express-session');
 const port = 3001;
 
 app.use(bodyParser.json());
@@ -25,6 +26,14 @@ db.connect((err) => {
   if (err) throw err;
   console.log("Connected to database");
 });
+
+// セッションの設定
+app.use(session({
+  secret: 'your_secret_key', // セッションの暗号化キー
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // HTTPSを使っていない場合はfalseに設定
+}));
 
 
 app.post('/login', (req, res) => {
@@ -53,6 +62,7 @@ app.post('/login', (req, res) => {
       }
 
       if (isMatch) {
+        req.session.user = { id: user.id, username: user.username };
         console.log('Login successful');
         res.status(200).json({ message: 'Login successful' });
       } else {
@@ -94,6 +104,27 @@ app.post('/register', (req, res) => {
       });
     }
   });
+});
+
+app.post('/logout', (req, res) => {
+  req.session.destroy(err => {
+    if (err) return res.status(500).json({ message: 'Logout failed' });
+    res.clearCookie('connect.sid');
+    res.status(200).json({ message: 'Logout successful' });
+  });
+});
+
+// 認証ミドルウェア
+function isAuthenticated(req, res, next) {
+  if (req.session.user) {
+    next();
+  } else {
+    res.status(401).json({ message: 'Not authenticated' });
+  }
+}
+
+app.get('/check-session', isAuthenticated, (req, res) => {
+  res.status(200).json({ user: req.session.user });
 });
 
 //クイズ関連ーーーーーーーーーーーーーーーーーーーーーーーーーーーー

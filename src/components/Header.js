@@ -1,8 +1,9 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography , IconButton} from '@mui/material';
 import { styled } from '@mui/system';
-import { AccountCircle } from '@mui/icons-material';
+import { AccountCircle} from '@mui/icons-material';
 import './Header.css';
+import Logout from '../Logout';
 const StyledAppBar = styled(AppBar)(({ theme }) => ({
   zIndex: theme.zIndex.drawer + 1 || 1300,
   backgroundColor: theme.palette.primary.main,
@@ -29,16 +30,18 @@ const Title = styled(Typography)({
   textAlign: 'center', // 追加
 });
 
-const Header = ({ loggedIn, handleLogout,username}) => {
+const Header = () => {
   return (
     <HeaderContainer>
+      
       <StyledAppBar position="fixed">
         <StyledToolbar>
-          <IconButton edge="start" onClick={handleLogout}  aria-label="account" color='icon'>
+          <IconButton edge="start" aria-label="account" color='icon'>
             <AccountCircle />
           </IconButton>
 
           <Title variant="h6" color={'#A0937D'} fontFamily={'"Press Start 2P", cursive'}>Disaster Master</Title>
+          <Logout />
         </StyledToolbar>
       </StyledAppBar>
     </HeaderContainer>

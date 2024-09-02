@@ -1,8 +1,5 @@
 // TopPage.js
 
-
-// TopPage.js
-
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { ThemeProvider, createTheme } from '@mui/material/styles';

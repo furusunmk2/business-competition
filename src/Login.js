@@ -20,7 +20,7 @@ function Login({ setLoggedIn }) {
       const response = await axios.post('http://localhost:3001/login', { loginInput, password }, { withCredentials: true });
       if (response.data && response.status === 200) {
         setLoggedIn(true);
-        navigate('/app');
+        navigate('/app/home');
       } else {
         setMessage('ログイン失敗');
       }

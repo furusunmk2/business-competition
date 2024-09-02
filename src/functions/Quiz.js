@@ -12,8 +12,11 @@ const Quiz = () => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [quizzes, setQuizzes] = useState([]);
   const [answered, setAnswered] = useState(false);
+  const [showList, setShowList] = useState(false);
 
   const userId = 1; // 仮のユーザーID
+
+  
 
   useEffect(() => {
     const fetchQuiz = async (quizId) => {
@@ -79,15 +82,23 @@ const Quiz = () => {
     setCurrentQuizId(quizId);
   };
 
+  const toggleList = () => {
+    setShowList(!showList);
+  };
+  
+
   return (
     <div>
-      <List>
-        {quizzes.map((q) => (
-          <ListItem button key={q.id} onClick={() => handleQuizSelect(q.id)}>
-            <ListItemText primary={q.title} />
-          </ListItem>
-        ))}
-      </List>
+      <Button onClick={toggleList}>クイズ一覧</Button>
+      {showList && (
+        <List>
+          {quizzes.map((q) => (
+            <ListItem button key={q.id} onClick={() => handleQuizSelect(q.id)}>
+              <ListItemText primary={q.title} />
+            </ListItem>
+          ))}
+        </List>
+      )}
 
       {quiz && (
         <div>
