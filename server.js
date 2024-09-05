@@ -241,6 +241,85 @@ app.post('/api/delete-account', isAuthenticated, (req, res) => {
 });
 
 //学習ページ関連ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+app.get('/api/learning-materials', (req, res) => {
+  const sql = 'SELECT id, title, content FROM learning_materials ORDER BY id ASC';
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error('Error fetching learning materials:', err);
+      res.status(500).send('Server error');
+      return;
+    }
+    res.json(results);
+  });
+});
+
+app.post('/api/mark-learned', isAuthenticated, (req, res) => {
+  const userId = req.session.user.id;  // Get user ID from session
+  const { materialId } = req.body;  // Get material ID from request body
+
+  if (!materialId) {
+    return res.status(400).json({ message: 'Material ID is required' });
+  }
+
+  // Check if a record already exists for the user and material
+  const checkSql = 'SELECT * FROM user_material_views WHERE user_id = ? AND material_id = ?';
+  
+  db.query(checkSql, [userId, materialId], (err, results) => {
+    if (err) {
+      console.error('Error checking user_material_views:', err);
+      return res.status(500).json({ message: 'Failed to check record' });
+    }
+
+    if (results.length > 0) {
+      // If record exists, update the learned_at field
+      const updateSql = 'UPDATE user_material_views SET learned_at = NOW() WHERE user_id = ? AND material_id = ?';
+      db.query(updateSql, [userId, materialId], (err, result) => {
+        if (err) {
+          console.error('Error updating user_material_views:', err);
+          return res.status(500).json({ message: 'Failed to update record' });
+        }
+        return res.status(200).json({ message: 'Material marked as learned (updated)' });
+      });
+    } else {
+      // If no record exists, insert a new one
+      const insertSql = 'INSERT INTO user_material_views (user_id, material_id, learned_at) VALUES (?, ?, NOW())';
+      db.query(insertSql, [userId, materialId], (err, result) => {
+        if (err) {
+          console.error('Error inserting into user_material_views:', err);
+          return res.status(500).json({ message: 'Failed to insert record' });
+        }
+        return res.status(200).json({ message: 'Material marked as learned (new)' });
+      });
+    }
+  });
+});
+
+// Route to get total number of learning materials
+app.get('/api/total-materials', (req, res) => {
+  const sql = 'SELECT COUNT(*) AS total FROM learning_materials';
+  db.query(sql, (err, result) => {
+    if (err) {
+      console.error('Error fetching total materials:', err);
+      return res.status(500).json({ message: 'Failed to get total materials' });
+    }
+    res.json({ total: result[0].total });
+  });
+});
+
+// Route to get the number of learned materials by the user
+app.get('/api/learned-materials', isAuthenticated, (req, res) => {
+  const userId = req.session.user.id;
+
+  const sql = 'SELECT COUNT(*) AS learned FROM user_material_views WHERE user_id = ?';
+  db.query(sql, [userId], (err, result) => {
+    if (err) {
+      console.error('Error fetching learned materials:', err);
+      return res.status(500).json({ message: 'Failed to get learned materials' });
+    }
+    res.json({ learned: result[0].learned });
+  });
+});
+
 
 
 //クイズページ関連ーーーーーーーーーーーーーーーーーーーーーーーーーーーー

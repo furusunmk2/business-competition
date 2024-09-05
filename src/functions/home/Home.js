@@ -1,8 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import QuizStats from '../quiz/QuizStats';
+import { useQuizStats } from '../quiz/useQuizStats'; // カスタムフックをインポート
+import LearningStats from '../learning/learningStats';
+import useLearningStats from '../learning/useLearningStats';
 
 function Home() {
-  const [progress, setProgress] = useState(30); // 初期進捗率30%として設定
+  const quizStats = useQuizStats(); // カスタムフックを使用
+  const quizAccuracyRate = quizStats.accuracyRate
+  const { totalMaterials, learnedMaterials, achievementRate } = useLearningStats();
 
   const styles = {
     homeContainer: {
@@ -10,17 +16,29 @@ function Home() {
       padding: '20px',
       fontSize: '20px',
     },
-    progressBarContainer: {
+    quizAccuracyRateBarContainer: {
       width: '100%',
       backgroundColor: '#e0e0df',
       borderRadius: '10px',
       margin: '20px 0',
     },
-    progressBar: {
+    quizAccuracyRateBar: {
       backgroundColor: '#76c7c0',
       height: '20px',
       borderRadius: '10px',
-      width: `${progress}%`,
+      width: `${quizAccuracyRate}%`,
+    },
+    achievementRateBarContainer: {
+      width: '100%',
+      backgroundColor: '#e0e0df',
+      borderRadius: '10px',
+      margin: '20px 0',
+    },
+    achievementRateBar: {
+      backgroundColor: '#76c7c0',
+      height: '20px',
+      borderRadius: '10px',
+      width: `${achievementRate}%`,
     },
     buttonContainer: {
       display: 'flex',
@@ -76,10 +94,14 @@ function Home() {
 
       {/* 学習進捗状況のステータスバー */}
       <h2>学習進捗状況</h2>
-      <div style={styles.progressBarContainer}>
-        <div style={styles.progressBar} />
+      <div style={styles.achievementRateBarContainer}>
+        <div style={styles.achievementRateBar} />
       </div>
-      <p>クイズ正答率: {progress}%</p>
+      <p>学習達成率: {achievementRate}%</p>
+      <div style={styles.quizAccuracyRateBarContainer}>
+        <div style={styles.quizAccuracyRateBar} />
+      </div>
+      <p>クイズ正答率: {quizAccuracyRate}%</p>
 
       {/* 各ページへのリンクボタン */}
       <div style={styles.buttonContainer}>
@@ -99,7 +121,7 @@ function Home() {
           設定
         </Link>
       </div>
-
+      <QuizStats /><LearningStats />
       {/* 外部リンク */}
       <div style={styles.externalLinks}>
         <a href="https://www.bousai.go.jp/" style={styles.externalLink} target="_blank" rel="noopener noreferrer">
