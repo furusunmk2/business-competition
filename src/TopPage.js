@@ -2,10 +2,9 @@
 
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material/styles';
 import { styled, keyframes } from '@mui/system';
 import { Typography, Link } from '@mui/material';
-import Header from './components/Header';
 import Login from './Login';
 import Register from './Register';
 import './TopPage.css';
@@ -38,7 +37,7 @@ const fadeInAndScale = keyframes`
 const Title = styled('h1')({
   fontSize: '2rem',
 
-  animation: `${fadeInAndScale} 18s ease-in-out`,
+  animation: `${fadeInAndScale} 1s ease-in-out`,
   animationFillMode: 'forwards', // アニメーション終了後に最終状態を保持
   cursor: 'pointer', // ポインタを表示
 });

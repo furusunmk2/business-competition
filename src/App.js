@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
-import Home from './functions/Home';
+import Home from './functions/home/Home';
 import AI from './functions/AI';
-import Config from './functions/Config';
 import Simulation from './functions/Simulation';
-import Learning from './functions/Learning';
-import Quiz from './functions/Quiz';
+import Learning from './functions/learning/Learning';
+import Quiz from './functions/quiz/Quiz';
 import Header from './components/Header';
 import Menu from './components/Menu';
 import Footer from './components/Footer';
+import Config from './functions/config/Config';
+import ChangeNickname from './functions/config/ChangeNickname';
+import ChangeEmail from './functions/config/ChangeEmail';
+import ChangePassword from './functions/config/ChangePassword';
+import DeleteAccount from './functions/config/DeleteAccount';
 
 
 function App() {
@@ -31,11 +35,11 @@ function App() {
       .catch(() => setLoading(false));
   }, []);
 
-  if (loading) {
+  if (loading) { //セッション読み込み中の場合
     return <div>Loading...</div>;
   }
 
-  if (!loggedIn) {
+  if (!loggedIn) { //ログイン状態でない場合
     return <Navigate to="/" />;
   }
 
@@ -52,6 +56,10 @@ function App() {
             <Route path="/simulation" element={<Simulation />} />
             <Route path="/ai" element={<AI />} />
             <Route path="/config" element={<Config />} />
+            <Route path='/change-nickname' element={<ChangeNickname />} />
+            <Route path='/change-email' element={<ChangeEmail />} />
+            <Route path='/change-password' element={<ChangePassword />} />
+            <Route path='/delete-account' element={<DeleteAccount />} />
           </Routes>
         </main>
       </div>

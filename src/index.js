@@ -1,6 +1,4 @@
 // index.js
-// index.js
-// index.js
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';

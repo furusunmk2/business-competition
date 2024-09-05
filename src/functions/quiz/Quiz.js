@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Typography, RadioGroup, FormControlLabel, Radio, List, ListItem, ListItemText } from '@mui/material';
+import QuizStats from './QuizStats';
 
 const Quiz = () => {
   const [quiz, setQuiz] = useState(null);

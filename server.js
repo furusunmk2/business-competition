@@ -64,6 +64,7 @@ app.post('/login', (req, res) => {
       if (isMatch) {
         req.session.user = { id: user.id, username: user.username };
         console.log('Login successful');
+        console.log(user.id,user.username)
         res.status(200).json({ message: 'Login successful' });
       } else {
         console.log('Invalid username/email or password: password mismatch');
@@ -114,6 +115,7 @@ app.post('/logout', (req, res) => {
   });
 });
 
+
 // 認証ミドルウェア
 function isAuthenticated(req, res, next) {
   if (req.session.user) {
@@ -127,7 +129,121 @@ app.get('/check-session', isAuthenticated, (req, res) => {
   res.status(200).json({ user: req.session.user });
 });
 
-//クイズ関連ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+// Fetch user info based on session user ID
+app.get('/api/user-info/:id', isAuthenticated, (req, res) => {
+  const userId = req.params.id;
+  db.query('SELECT nickname, email FROM users WHERE id = ?', [userId], (err, results) => {
+    if (err) {
+      return res.status(500).send('Error fetching user data');
+    }
+    res.json(results[0]);
+  });
+});
+
+app.post('/api/change-nickname', isAuthenticated, (req, res) => {
+  const { nickname } = req.body;
+  const userId = req.session.user.id;
+
+  if (!nickname) {
+    return res.status(400).send('Nickname is required');
+  }
+
+  db.query('UPDATE users SET nickname = ? WHERE id = ?', [nickname, userId], (err, result) => {
+    if (err) {
+      return res.status(500).send('Error updating nickname');
+    }
+    res.send('Nickname updated successfully');
+  });
+});
+
+app.post('/api/change-email', isAuthenticated, (req, res) => {
+  const { email } = req.body;
+  const userId = req.session.user.id;
+
+  if (!email) {
+    return res.status(400).send('Email is required');
+  }
+
+  db.query('UPDATE users SET email = ? WHERE id = ?', [email, userId], (err, result) => {
+    if (err) {
+      return res.status(500).send('Error updating email');
+    }
+    res.send('Email updated successfully');
+  });
+});
+
+app.post('/api/change-password', isAuthenticated, (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  const userId = req.session.user.id;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).send('Current and new password are required');
+  }
+
+  // 現在のパスワードを取得
+  db.query('SELECT password FROM users WHERE id = ?', [userId], (err, results) => {
+    if (err || results.length === 0) {
+      return res.status(500).send('Error fetching user data');
+    }
+
+    const storedPassword = results[0].password;
+
+    // 現在のパスワードが正しいか確認
+    if (!bcrypt.compareSync(currentPassword, storedPassword)) {
+      return res.status(401).send('Current password is incorrect');
+    }
+
+    // 新しいパスワードをハッシュ化
+    const hashedPassword = bcrypt.hashSync(newPassword, 10);
+
+    // パスワードを更新
+    db.query('UPDATE users SET password = ? WHERE id = ?', [hashedPassword, userId], (err, result) => {
+      if (err) {
+        return res.status(500).send('Error updating password');
+      }
+      res.send('Password updated successfully');
+    });
+  });
+});
+
+app.post('/api/delete-account', isAuthenticated, (req, res) => {
+  const { currentPassword } = req.body;
+  const userId = req.session.user.id;
+
+  if (!currentPassword) {
+    return res.status(400).send('Current password is required');
+  }
+
+  // 現在のパスワードを取得
+  db.query('SELECT password FROM users WHERE id = ?', [userId], (err, results) => {
+    if (err || results.length === 0) {
+      return res.status(500).send('Error fetching user data');
+    }
+
+    const storedPassword = results[0].password;
+
+    // 現在のパスワードが正しいか確認
+    if (!bcrypt.compareSync(currentPassword, storedPassword)) {
+      return res.status(401).send('Current password is incorrect');
+    }
+
+    // アカウントを削除
+    db.query('DELETE FROM users WHERE id = ?', [userId], (err, result) => {
+      if (err) {
+        return res.status(500).send('Error deleting account');
+      }
+      // セッションを削除
+      req.session.destroy(() => {
+        res.send('Account deleted successfully');
+      });
+    });
+  });
+});
+
+//学習ページ関連ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+
+
+//クイズページ関連ーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 app.get('/api/quiz/:id', (req, res) => {
   const quizId = req.params.id;
   const quizQuery = 'SELECT * FROM quizzes WHERE id = ?';
@@ -179,6 +295,42 @@ app.post('/api/answer', (req, res) => {
     }
   });
 });
+
+app.get('/quiz-stats', isAuthenticated, (req, res) => {
+  const userId = req.session.user.id;
+
+  // Get the total number of questions
+  db.query('SELECT COUNT(*) as total FROM quizzes', (err, totalQuestions) => {
+    if (err) {
+      return res.status(500).json({ message: 'Error fetching total questions' });
+    }
+
+    // Get the number of answers and correct answers for the logged-in user
+    db.query(`
+      SELECT 
+      COALESCE(COUNT(*), 0) as totalAnswers,
+      COALESCE(SUM(is_correct), 0) as correctAnswers
+      FROM user_answers
+      WHERE user_id = ?
+    `, [userId], (err, userStats) => {
+      if (err) {
+        return res.status(500).json({ message: 'Error fetching user stats' });
+      }
+
+      // Calculate accuracy rate
+      const accuracyRate = (userStats[0].correctAnswers / totalQuestions[0].total) * 100;
+
+      res.status(200).json({
+        totalQuestions: totalQuestions[0].total,
+        totalAnswers: userStats[0].totalAnswers,
+        correctAnswers: userStats[0].correctAnswers,
+        accuracyRate: accuracyRate.toFixed(2)
+      });
+    });
+  });
+});
+
+
 //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
 
