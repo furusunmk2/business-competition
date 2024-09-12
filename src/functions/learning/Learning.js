@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Typography, Box, Grid } from '@mui/material';
+import { Button, Typography, Box, Grid, List, ListItem, ListItemText } from '@mui/material';
 
 const Learning = () => {
   const [materials, setMaterials] = useState([]);
@@ -51,40 +51,69 @@ const Learning = () => {
 
   const currentMaterial = materials[currentMaterialIndex];
 
+  const handleSelectMaterial = (index) => {
+    setCurrentMaterialIndex(index);
+  };
+
   return (
-    <Box sx={{ padding: '2rem' }}>
-      {currentMaterial ? (
-        <>
-          <Typography variant="h5">{currentMaterial.title}</Typography>
-          <Typography variant="body1">{currentMaterial.content}</Typography>
-          <div>
-            <Button
-              variant="contained"
-              onClick={handlePrevious}
-              disabled={currentMaterialIndex === 0}
+    <Grid container spacing={3}>
+      {/* 左側の学習ページ一覧 */}
+      <Grid item xs={4}>
+        <Typography variant="h6">学習ページ一覧</Typography>
+        <List>
+          {materials.map((material, index) => (
+            <ListItem 
+              button 
+              key={material.id} 
+              selected={index === currentMaterialIndex}
+              onClick={() => handleSelectMaterial(index)}
             >
-              前のページ
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleNext}
-              disabled={currentMaterialIndex >= materials.length - 1}
-            >
-              次のページ
-            </Button>
-            <Button
-              variant="contained"
-              color="secondary"
-              onClick={handleLearned}
-            >
-              学習した！
-            </Button>
-          </div>
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </Box>
+              <ListItemText primary={material.title} />
+            </ListItem>
+          ))}
+        </List>
+      </Grid>
+
+      {/* 右側の学習ページ詳細 */}
+      <Grid item xs={8}>
+        <Box sx={{ padding: '2rem' }}>
+          {currentMaterial ? (
+            <>
+              <Typography variant="h5">{currentMaterial.title}</Typography>
+              <Typography variant="body1">{currentMaterial.content}</Typography>
+              <div>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleLearned}
+                >
+                  学習した！
+                </Button>
+              </div>
+              <div>
+                <Button
+                  variant="contained"
+                  onClick={handlePrevious}
+                  disabled={currentMaterialIndex === 0}
+                >
+                  前のページ
+                </Button>
+                <Button
+                  variant="contained"
+                  onClick={handleNext}
+                  disabled={currentMaterialIndex >= materials.length - 1}
+                >
+                  次のページ
+                </Button>
+              </div>
+              
+            </>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </Box>
+      </Grid>
+    </Grid>
   );
 };
 

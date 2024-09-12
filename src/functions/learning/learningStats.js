@@ -6,7 +6,7 @@ const LearningStats = () => {
 
   return (
     <div>
-      <h2>Learning Progress</h2>
+      <h2>Learning Stats</h2>
       <p>Total Materials: {totalMaterials}</p>
       <p>Learned Materials: {learnedMaterials}</p>
       <p>Achievement Rate: {achievementRate}%</p>

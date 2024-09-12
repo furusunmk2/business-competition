@@ -16,7 +16,7 @@ const DeleteAccount = () => {
         navigate('/');
       })
       .catch(error => {
-        setMessage('Error deleting account: ' + error.response.data);
+        setMessage('アカウントの削除に失敗しました。' + error.response.data);
         console.error('Error:', error);
       });
   };

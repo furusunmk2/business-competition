@@ -1,11 +1,12 @@
 import React from 'react';
+import {Box, Typography} from '@mui/material';
 
 function Simulation() {
   return (
-    <div>
-      <h2>シミュレーション</h2>
-      <p>ここにシミュレーションのコンテンツを追加してください。</p>
-    </div>
+    <Box sx={{ padding: '2rem'}}>
+      <Typography variant='h5'>シミュレーション</Typography>
+      <Typography variant='body1'>ここにシミュレーションのコンテンツを追加してください。</Typography>
+    </Box>
   );
 }
 

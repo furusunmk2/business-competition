@@ -1,7 +1,6 @@
-// quiz.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Typography, RadioGroup, FormControlLabel, Radio, List, ListItem, ListItemText, Box } from '@mui/material';
+import { Button, Typography, RadioGroup, FormControlLabel, Radio, List, ListItem, ListItemText, Box, Grid } from '@mui/material';
 
 const Quiz = () => {
   const [quiz, setQuiz] = useState(null);
@@ -12,11 +11,10 @@ const Quiz = () => {
   const [isCorrect, setIsCorrect] = useState(null);
   const [quizzes, setQuizzes] = useState([]);
   const [answered, setAnswered] = useState(false);
-  const [showList, setShowList] = useState(false);
   const [userId, setUserId] = useState(null);
 
-
   useEffect(() => {
+    // Fetch session info
     axios.get('http://localhost:3001/check-session')
       .then(response => {
         setUserId(response.data.user.id);
@@ -25,7 +23,6 @@ const Quiz = () => {
         console.error('Error fetching user ID:', error);
       });
   }, []);
-  
 
   useEffect(() => {
     const fetchQuiz = async (quizId) => {
@@ -91,79 +88,85 @@ const Quiz = () => {
     setCurrentQuizId(quizId);
   };
 
-  const toggleList = () => {
-    setShowList(!showList);
-  };
-  
-
   return (
-    <Box sx={{ padding: '2rem' }}>
-      <Button onClick={toggleList}>クリックでクイズ一覧を表示</Button>
-      {showList && (
+    <Grid container spacing={3}>
+      {/* 左側のクイズ一覧 */}
+      <Grid item xs={4}>
+        <Typography variant="h6">クイズ一覧</Typography>
         <List>
           {quizzes.map((q) => (
-            <ListItem button key={q.id} onClick={() => handleQuizSelect(q.id)}>
+            <ListItem 
+              button 
+              key={q.id} 
+              selected={q.id === currentQuizId}
+              onClick={() => handleQuizSelect(q.id)}
+            >
               <ListItemText primary={q.title} />
             </ListItem>
           ))}
         </List>
-      )}
+      </Grid>
 
-      {quiz && (
-        <Box>
-          <Typography variant="h5">{quiz.title}</Typography>
-          <Typography variant="body1">{quiz.question}</Typography>
-          <RadioGroup value={selectedChoice} onChange={(e) => setSelectedChoice(Number(e.target.value))}>
-            {choices.map((choice) => (
-              <FormControlLabel
-                key={choice.id}
-                value={choice.id}
-                control={<Radio />}
-                label={choice.choice}
+      {/* 右側のクイズ詳細 */}
+      <Grid item xs={8}>
+        <Box sx={{ padding: '2rem' }}>
+          {quiz && (
+            <>
+              <Typography variant="h5">{quiz.title}</Typography>
+              <Typography variant="body1">{quiz.question}</Typography>
+              <RadioGroup value={selectedChoice} onChange={(e) => setSelectedChoice(Number(e.target.value))}>
+                {choices.map((choice) => (
+                  <FormControlLabel
+                    key={choice.id}
+                    value={choice.id}
+                    control={<Radio />}
+                    label={choice.choice}
+                    disabled={answered}
+                  />
+                ))}
+              </RadioGroup>
+              
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleAnswer}
                 disabled={answered}
-              />
-            ))}
-          </RadioGroup>
-          
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={handleAnswer}
-            disabled={answered}
-          >
-            答える
-          </Button>
-          {showExplanation && (
-            <div>
-              <Typography variant="body1" style={{ marginTop: '10px' }}>
-                {isCorrect ? '正解です！' : '不正解です'}
-              </Typography>
-              <Typography variant="body1" style={{ marginTop: '10px' }}>
-                {quiz.explanation}
-              </Typography>
-            </div>
+              >
+                答える
+              </Button>
+              {showExplanation && (
+                <div>
+                  <Typography variant="body1" style={{ marginTop: '10px' }}>
+                    {isCorrect ? '正解です！' : '不正解です'}
+                  </Typography>
+                  <Typography variant="body1" style={{ marginTop: '10px' }}>
+                    {quiz.explanation}
+                  </Typography>
+                </div>
+              )}
+              <div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handlePreviousQuiz}
+                  disabled={currentQuizId <= 1}
+                >
+                  前の問題
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleNextQuiz}
+                  disabled={currentQuizId >= quizzes.length}
+                >
+                  次の問題
+                </Button>
+              </div>
+            </>
           )}
-          <div>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handlePreviousQuiz}
-              disabled={currentQuizId <= 1}
-            >
-              前の問題
-            </Button>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleNextQuiz}
-              disabled={currentQuizId >= quizzes.length}
-            >
-              次の問題
-            </Button>
-          </div>
         </Box>
-      )}
-    </Box>
+      </Grid>
+    </Grid>
   );
 };
 

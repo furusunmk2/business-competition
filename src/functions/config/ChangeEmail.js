@@ -9,10 +9,10 @@ const ChangeEmail = () => {
   const handleEmailChange = () => {
     axios.post('http://localhost:3001/api/change-email', { email })
       .then(response => {
-        setMessage('Email updated successfully!');
+        setMessage('メールアドレスの更新に成功しました。');
       })
       .catch(error => {
-        setMessage('Error updating email');
+        setMessage('メールアドレスの更新に失敗しました。');
         console.error('Error:', error);
       });
   };

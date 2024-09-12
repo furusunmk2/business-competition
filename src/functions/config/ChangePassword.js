@@ -10,10 +10,10 @@ const ChangePassword = () => {
   const handlePasswordChange = () => {
     axios.post('http://localhost:3001/api/change-password', { currentPassword, newPassword })
       .then(response => {
-        setMessage('Password updated successfully!');
+        setMessage('パスワードの更新に成功しました。');
       })
       .catch(error => {
-        setMessage('Error updating password: ' + error.response.data);
+        setMessage('パスワードの更新に失敗しました。' + error.response.data);
         console.error('Error:', error);
       });
   };

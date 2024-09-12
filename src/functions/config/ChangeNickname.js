@@ -9,10 +9,10 @@ const ChangeNickname = () => {
   const handleNicknameChange = () => {
     axios.post('http://localhost:3001/api/change-nickname', { nickname })
       .then(response => {
-        setMessage('Nickname updated successfully!');
+        setMessage('ニックネームの更新に成功しました。');
       })
       .catch(error => {
-        setMessage('Error updating nickname');
+        setMessage('ニックネームの更新に失敗しました。');
         console.error('Error:', error);
       });
   };
