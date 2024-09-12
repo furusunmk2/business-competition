@@ -68,6 +68,9 @@ function Home() {
           気象庁の災害情報
         </Button>
       </Box>
+      <Typography sx={{textAlign: 'center'}}>
+        <img src='/backgroundimage.png' alt='' width={448} height={256} />
+      </Typography>
     </Box>
   );
 }

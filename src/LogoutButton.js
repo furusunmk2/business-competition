@@ -1,10 +1,10 @@
 // Logout.js
 import React from 'react';
 import axios from 'axios';
-import { IconButton } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
 
-const Logout = () => {
+const LogoutButton = () => {
 
     const handleLogout = async () => {
         try {
@@ -17,10 +17,12 @@ const Logout = () => {
     };
 
     return (
-        <IconButton color="icon" onClick={handleLogout}>
-            <LogoutIcon />
-        </IconButton>
+        <Tooltip title='ログアウト'>
+            <IconButton onClick={handleLogout}>
+                <LogoutIcon />
+            </IconButton>
+        </Tooltip>
     );
 };
 
-export default Logout;
+export default LogoutButton;

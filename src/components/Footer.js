@@ -1,12 +1,27 @@
+// footer.js
 import React from 'react';
+import { Box, Container, Typography } from '@mui/material';
 
-function Footer() {
+const Footer = () => {
   return (
-    <footer className="footer" style={{textAlign:"center"}}>
-      <p>&copy; 2024 ミギカタアガリプロジェクト</p>
-    </footer>
+    <Box
+      component="footer"
+      sx={{
+        py: 3,
+        px: 2,
+        mt: 'auto',
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[800],
+      }}
+    >
+      <Container maxWidth="sm">
+        <Typography variant="body1" textAlign={'center'}>© 2024 ミギカタアガリ</Typography>
+        <Typography variant="body2" color="text.secondary" textAlign={'center'}>
+          All rights reserved.
+        </Typography>
+      </Container>
+    </Box>
   );
-}
+};
 
 export default Footer;
-

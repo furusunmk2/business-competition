@@ -37,7 +37,7 @@ const ChangeNickname = () => {
         color="primary" 
         onClick={handleNicknameChange}
       >
-        更新する
+        変更する
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </Box>
