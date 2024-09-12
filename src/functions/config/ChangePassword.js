@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField, Typography, Container } from '@mui/material';
+import { Button, TextField, Typography, Box } from '@mui/material';
 import axios from 'axios';
 
 const ChangePassword = () => {
@@ -19,12 +19,15 @@ const ChangePassword = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Change Password
+    <Box sx={{ padding: '2rem' }}>
+      <Typography variant="h5" gutterBottom>
+        パスワードの変更
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        パスワードの変更を行います。現在のパスワードと新しいパスワードを入力してください。
       </Typography>
       <TextField
-        label="Current Password"
+        label="現在のパスワード"
         type="password"
         value={currentPassword}
         onChange={(e) => setCurrentPassword(e.target.value)}
@@ -32,7 +35,7 @@ const ChangePassword = () => {
         margin="normal"
       />
       <TextField
-        label="New Password"
+        label="新しいパスワード"
         type="password"
         value={newPassword}
         onChange={(e) => setNewPassword(e.target.value)}
@@ -44,10 +47,10 @@ const ChangePassword = () => {
         color="primary" 
         onClick={handlePasswordChange}
       >
-        Update Password
+        変更する
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
-    </Container>
+    </Box>
   );
 };
 

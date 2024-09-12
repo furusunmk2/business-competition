@@ -14,6 +14,7 @@ import ChangeNickname from './functions/config/ChangeNickname';
 import ChangeEmail from './functions/config/ChangeEmail';
 import ChangePassword from './functions/config/ChangePassword';
 import DeleteAccount from './functions/config/DeleteAccount';
+import DebugRoom from './functions/DebugRoom';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
             <Route path='/change-email' element={<ChangeEmail />} />
             <Route path='/change-password' element={<ChangePassword />} />
             <Route path='/delete-account' element={<DeleteAccount />} />
+            <Route path='/debug-room' element={<DebugRoom />} />
           </Routes>
         </main>
       </div>

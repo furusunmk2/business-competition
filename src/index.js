@@ -12,7 +12,7 @@ import axios from 'axios';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './theme';
 
-function IndexComponent() {
+function Index() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +57,6 @@ function IndexComponent() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<IndexComponent />);
+root.render(<Index />);
 
 reportWebVitals();

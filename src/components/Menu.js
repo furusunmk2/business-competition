@@ -30,8 +30,10 @@ const Menu = () => {
         aria-label="menu"
         margi
         onClick={toggleDrawer(true)}
-        style={{ marginTop: '50px' }} 
-
+        style={{
+          marginTop: '50px',
+          position: 'fixed'
+        }} 
       >
         <MenuIcon color='primary'/>
       </IconButton>

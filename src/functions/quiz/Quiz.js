@@ -1,8 +1,7 @@
 // quiz.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, Typography, RadioGroup, FormControlLabel, Radio, List, ListItem, ListItemText } from '@mui/material';
-import QuizStats from './QuizStats';
+import { Button, Typography, RadioGroup, FormControlLabel, Radio, List, ListItem, ListItemText, Box } from '@mui/material';
 
 const Quiz = () => {
   const [quiz, setQuiz] = useState(null);
@@ -98,7 +97,7 @@ const Quiz = () => {
   
 
   return (
-    <div>
+    <Box sx={{ padding: '2rem' }}>
       <Button onClick={toggleList}>クリックでクイズ一覧を表示</Button>
       {showList && (
         <List>
@@ -111,9 +110,9 @@ const Quiz = () => {
       )}
 
       {quiz && (
-        <div>
-          <Typography variant="h4">{quiz.title}</Typography>
-          <Typography variant="h6">{quiz.question}</Typography>
+        <Box>
+          <Typography variant="h5">{quiz.title}</Typography>
+          <Typography variant="body1">{quiz.question}</Typography>
           <RadioGroup value={selectedChoice} onChange={(e) => setSelectedChoice(Number(e.target.value))}>
             {choices.map((choice) => (
               <FormControlLabel
@@ -162,9 +161,9 @@ const Quiz = () => {
               次の問題
             </Button>
           </div>
-        </div>
+        </Box>
       )}
-    </div>
+    </Box>
   );
 };
 

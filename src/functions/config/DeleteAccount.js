@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField, Typography, Container } from '@mui/material';
+import { Button, TextField, Typography, Box } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ const DeleteAccount = () => {
   const handleAccountDelete = () => {
     axios.post('http://localhost:3001/api/delete-account', { currentPassword })
       .then(response => {
-        setMessage('Account deleted successfully!');
+        alert('Account deleted successfully!');
         // Redirect to the login page after deletion
         navigate('/');
       })
@@ -22,12 +22,15 @@ const DeleteAccount = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Delete Account
+    <Box sx={{ padding: '2rem' }}>
+      <Typography variant="h5" gutterBottom>
+        アカウントの削除
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        アカウントの削除を行います。パスワードを入力してください。
       </Typography>
       <TextField
-        label="Current Password"
+        label="パスワード"
         type="password"
         value={currentPassword}
         onChange={(e) => setCurrentPassword(e.target.value)}
@@ -39,10 +42,10 @@ const DeleteAccount = () => {
         color="secondary" 
         onClick={handleAccountDelete}
       >
-        Delete Account
+        アカウント削除
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
-    </Container>
+    </Box>
   );
 };
 

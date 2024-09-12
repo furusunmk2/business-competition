@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField, Typography, Container } from '@mui/material';
+import { Button, TextField, Typography, Box } from '@mui/material';
 import axios from 'axios';
 
 const ChangeEmail = () => {
@@ -18,12 +18,15 @@ const ChangeEmail = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Change Email
+    <Box sx={{ padding: '2rem' }}>
+      <Typography variant="h5" gutterBottom>
+        メールアドレスの変更
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        メールアドレスの変更を行います。新しいメールアドレスを入力してください。
       </Typography>
       <TextField
-        label="New Email"
+        label="新しいメールアドレス"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         fullWidth
@@ -34,10 +37,11 @@ const ChangeEmail = () => {
         color="primary" 
         onClick={handleEmailChange}
       >
-        Update Email
+        変更する
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
-    </Container>
+    </Box>
+
   );
 };
 

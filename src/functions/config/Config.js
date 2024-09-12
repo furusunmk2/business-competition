@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Typography, Container } from '@mui/material';
+import { Button, Typography, Box, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -28,53 +28,64 @@ const Config = () => {
   }, []);
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
+    <Box sx={{ padding: '2rem' }}>
+      <Typography variant="h5" gutterBottom>
         アカウント設定
       </Typography>
-      <Typography variant="body1">
-        Nickname: {user.nickname}
-      </Typography>
-      <Typography variant="body1">
-        Email: {user.email}
+      <Typography variant="body1" gutterBottom>
+        メールアドレスやパスワード、ニックネームの確認・変更や、アカウントの削除ができます。
       </Typography>
 
-      <Button 
-        variant="contained" 
-        color="primary" 
-        onClick={() => navigate('/app/change-nickname')}
-        style={{ margin: '10px 0' }}
-      >
-        Change Nickname
-      </Button>
+      {/* Email Section */}
+      <Grid container sx={{ marginBottom: '1.5rem' }}>
+        <Grid item xs={12} sm={3}>
+          <Typography variant="subtitle1">メールアドレス</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="body1">{user.email}</Typography>
+          <Button variant="contained" color="primary" onClick={() => navigate('/app/change-email')}>
+            メールアドレスを変更
+          </Button>
+        </Grid>
+      </Grid>
 
-      <Button 
-        variant="contained" 
-        color="primary" 
-        onClick={() => navigate('/app/change-email')}
-        style={{ margin: '10px 0' }}
-      >
-        Change Email
-      </Button>
+      {/* Password Section */}
+      <Grid container sx={{ marginBottom: '1.5rem' }}>
+        <Grid item xs={12} sm={3}>
+          <Typography variant="subtitle1">パスワード変更</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+        <Button variant="contained" color="primary" onClick={() => navigate('/app/change-password')}>
+          パスワードを変更
+        </Button>
+        </Grid>
+      </Grid>
 
-      <Button 
-        variant="contained" 
-        color="primary" 
-        onClick={() => navigate('/app/change-password')}
-        style={{ margin: '10px 0' }}
-      >
-        Change Password
-      </Button>
+      {/* Nickname Section */}
+      <Grid container sx={{ marginBottom: '1.5rem' }}>
+        <Grid item xs={12} sm={3}>
+          <Typography variant="subtitle1">ニックネーム</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <Typography variant="body1">{user.nickname}</Typography>
+          <Button variant="outlined" color="primary" onClick={() => navigate('/app/change-nickname')}>
+            ニックネームを編集
+          </Button>
+        </Grid>
+      </Grid>
 
-      <Button 
-        variant="contained" 
-        color="secondary" 
-        onClick={() => navigate('/app/delete-account')}
-        style={{ margin: '10px 0' }}
-      >
-        Delete Account
-      </Button>
-    </Container>
+      {/* Account Deletion Section */}
+      <Grid container sx={{ marginBottom: '1.5rem' }}>
+        <Grid item xs={12} sm={3}>
+          <Typography variant="subtitle1">アカウント削除</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+        <Button variant="contained" color="secondary" onClick={() => navigate('/app/delete-account')}>
+            アカウント削除はこちら
+          </Button>
+        </Grid>
+      </Grid>
+    </Box>
   );
 };
 

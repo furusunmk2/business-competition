@@ -1,12 +1,9 @@
 // Register.js
-
-
-
 import React, { useState } from 'react';
 import { TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
 
-const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, setPassword: setGlobalPassword,setNickname: setGlobalNickname}) => {
+const Register = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [nickname, setNickname] = useState('');
@@ -19,10 +16,7 @@ const Register = ({ setUsername: setGlobalUsername,setEmail: setGlobalEmail, set
       console.log(response.data);
       if (response.status === 200) {
         alert('Registration successful');
-        setGlobalUsername(username);
-        setGlobalEmail(email);
-        setGlobalPassword(password);
-        setGlobalNickname(nickname);
+        
 
       } else {
         alert(`Registration failed: ${response.data.message}`);

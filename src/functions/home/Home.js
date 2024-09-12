@@ -121,7 +121,6 @@ function Home() {
           設定
         </Link>
       </div>
-      <QuizStats /><LearningStats />
       {/* 外部リンク */}
       <div style={styles.externalLinks}>
         <a href="https://www.bousai.go.jp/" style={styles.externalLink} target="_blank" rel="noopener noreferrer">

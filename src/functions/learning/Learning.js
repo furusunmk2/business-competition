@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Button from '@mui/material/Button';
+import { Button, Typography, Box, Grid } from '@mui/material';
 
 const Learning = () => {
   const [materials, setMaterials] = useState([]);
@@ -44,6 +44,7 @@ const Learning = () => {
     })
     .then(() => {
       console.log('Material marked as learned');
+      alert('学習しました！');
     })
     .catch(error => console.error('Error marking material as learned:', error));
   };
@@ -51,39 +52,39 @@ const Learning = () => {
   const currentMaterial = materials[currentMaterialIndex];
 
   return (
-    <div>
+    <Box sx={{ padding: '2rem' }}>
       {currentMaterial ? (
         <>
-          <h1>{currentMaterial.title}</h1>
-          <p>{currentMaterial.content}</p>
+          <Typography variant="h5">{currentMaterial.title}</Typography>
+          <Typography variant="body1">{currentMaterial.content}</Typography>
           <div>
             <Button
               variant="contained"
               onClick={handlePrevious}
               disabled={currentMaterialIndex === 0}
             >
-              Previous
+              前のページ
             </Button>
             <Button
               variant="contained"
               onClick={handleNext}
               disabled={currentMaterialIndex >= materials.length - 1}
             >
-              Next
+              次のページ
             </Button>
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               onClick={handleLearned}
             >
-              Learned
+              学習した！
             </Button>
           </div>
         </>
       ) : (
         <p>Loading...</p>
       )}
-    </div>
+    </Box>
   );
 };
 

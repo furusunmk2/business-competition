@@ -6,7 +6,7 @@ const QuizStats = () => {
 
   return (
     <div>
-      <h1>Quiz Stats</h1>
+      <h2>Quiz Stats</h2>
       <p>Total Questions: {stats.totalQuestions}</p>
       <p>Total Answers: {stats.totalAnswers}</p>
       <p>Correct Answers: {stats.correctAnswers}</p>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, TextField, Typography, Container } from '@mui/material';
+import { Button, TextField, Typography, Box } from '@mui/material';
 import axios from 'axios';
 
 const ChangeNickname = () => {
@@ -18,12 +18,15 @@ const ChangeNickname = () => {
   };
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Change Nickname
+    <Box sx={{ padding: '2rem' }}>
+      <Typography variant="h5" gutterBottom>
+        ニックネームの変更
+      </Typography>
+      <Typography variant="body1" gutterBottom>
+        ニックネームの変更を行います。新しいニックネームを入力してください。
       </Typography>
       <TextField
-        label="New Nickname"
+        label="新しいニックネーム"
         value={nickname}
         onChange={(e) => setNickname(e.target.value)}
         fullWidth
@@ -34,10 +37,10 @@ const ChangeNickname = () => {
         color="primary" 
         onClick={handleNicknameChange}
       >
-        Update Nickname
+        更新する
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
-    </Container>
+    </Box>
   );
 };
 
