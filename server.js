@@ -413,8 +413,7 @@ app.get('/quiz-stats', isAuthenticated, (req, res) => {
 //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
 //------AI処理
-const fs = require('fs'); // To read image files
-const path = require('path'); // For handling file paths
+
 const multer = require('multer');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const dotenv = require('dotenv');
@@ -423,51 +422,44 @@ dotenv.config();
 const upload = multer({ dest: 'uploads/' });
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-pro" });
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 app.post('/api/analyze', upload.single('image'), async (req, res) => {
-  let imagePath;  // Declare imagePath here for proper scoping
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: '画像ファイルが必要です。' });
+        }
 
-  try {
-      if (!req.file) {
-          return res.status(400).json({ error: '画像ファイルが必要です。' });
-      }
+        const imageFile = await fileToGenerativePart(req.file);
+        //プロンプト
+        const prompt = `
+            「地震が起きた場合、標識や信号機落下する危険性があります。また、ビルや木の倒壊も考えられます。」と言ってください
+        `;
 
-      // Define the image path correctly before reading the file
-      imagePath = path.join(__dirname, req.file.path);  // Make sure imagePath is declared
+        // AI モデルに prompt を送信して結果を取得
+        const result = await model.generateContent(prompt);
 
-      // Read and encode the image in base64 format
-      const imageBuffer = fs.readFileSync(imagePath);
-      const imageBase64 = imageBuffer.toString('base64');
+        // 結果をテキストとして取得
+        const analyzeResult = await result.response.text();
 
-      // Create the prompt for image analysis
-      const prompt = `
-          添付した写真を分析し、災害時の危険性の判断をしてください。
-          危険度は５～１で、数字が大きくなると危険度が増します。
-          判断結果を以下の形式で返し、危険度を述べた後と危険な部分を述べた後は改行を挟んでください：
-          危険度: [危険度５ or 危険度４ or 危険度３ or 危険度２ or 危険度１]
-          危険な部分: [危険な部分の名前]
-          理由: [危険な理由の簡潔な説明]
-          画像: ${imageBase64}
-      `;
-
-      // AI model response
-      const result = await model.generateContent(prompt);
-
-      // Analyze the result
-      const analyzeResult = await result.response.text();
-
-      res.json({ analyzeResult });
-  } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ error: '内部サーバーエラーが発生しました' });
-  } finally {
-      if (imagePath) {
-          // Cleanup uploaded image file
-          fs.unlinkSync(imagePath); // Removes the image after processing
-      }
-  }
+        res.json({ analyzeResult });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: '内部サーバーエラーが発生しました' });
+    }
 });
+
+const fs = require('fs').promises;
+
+async function fileToGenerativePart(file) {
+  const data = await fs.readFile(file.path); // アップロードされたファイルを読み込む
+  const base64EncodedData = data.toString('base64'); // Base64 エンコード
+  return {
+    inlineData: { data: base64EncodedData, mimeType: file.mimetype },
+  };
+}
+
+
 
 
 app.listen(port, () => {
