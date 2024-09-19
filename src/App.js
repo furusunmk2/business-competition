@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './functions/home/Home';
-import AI from './functions/AI';
-import Simulation from './functions/Simulation';
+import AI from './functions/AI/AI';
+import Simulation from './functions/simulation/Simulation';
 import Learning from './functions/learning/Learning';
 import Quiz from './functions/quiz/Quiz';
 import Header from './components/Header';
@@ -15,6 +15,7 @@ import ChangeEmail from './functions/config/ChangeEmail';
 import ChangePassword from './functions/config/ChangePassword';
 import DeleteAccount from './functions/config/DeleteAccount';
 import DebugRoom from './functions/DebugRoom';
+
 
 
 function App() {
