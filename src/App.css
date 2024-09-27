@@ -1,64 +1,85 @@
 /* App.css */
 
-body {
+/* フォントのインポートは最初に配置 */
+/* @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap'); */
+/* @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); */
 
+/* Google Fontsのインポート */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+
+/* 全体のフォント設定 */
+body {
+  font-family: 'DotGothic16', 'Arial', sans-serif; /* 日本語用フォント */
+}
+
+/* 英語専用のスタイル */
+.english-text {
+  font-family: 'Press Start 2P', 'Arial', sans-serif; /* 英語用フォント */
+}
+
+/* 日本語専用のスタイル */
+.japanese-text {
+  font-family: 'DotGothic16', 'Arial', sans-serif; /* 日本語用フォント */
+}
+
+
+body {
     margin: 0;
     padding: 0;
     background-color: #f5f5f5;
-  }
-  
-  #root {
+    font-family: 'DotGothic16', sans-serif; /* フォントファミリーを正しく指定 */
+}
+
+#root {
     display: flex;
     flex-direction: column;
     height: 100vh;
-  }
-  
-  .main-content {
-    display: flex;
-    flex-grow: 1;
-  }
-  
-.App {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-header {
-  flex-shrink: 0;
-}
-
-.main-container {
-  display: flex;
-  flex-grow: 1;
-  padding: 20px;
 }
 
 .main-content {
-  margin-top: 50px;
-  margin-left: 90px;
-  width: 100%;
-  padding: 20px;
+    display: flex;
+    flex-grow: 1;
+}
+
+.App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    flex-shrink: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+}
+
+.main-content {
+    margin-top: 50px;
+    margin-left: 90px;
+    width: 100%;
+    padding: 20px;
 }
 
 .menu {
-  width: 200px;
-  padding: 20px;
-  flex-shrink: 0;
-  height: calc(100vh - 60px); /* 60pxはヘッダーの高さを想定 */
-  position: fixed; /* メニューを固定 */
-  top: 60px; /* ヘッダーの下に配置 */
-  left: 0;
+    width: 200px;
+    padding: 20px;
+    flex-shrink: 0;
+    height: calc(100vh - 60px); /* 60pxはヘッダーの高さを想定 */
+    position: fixed; /* メニューを固定 */
+    top: 60px; /* ヘッダーの下に配置 */
+    left: 0;
 }
-
-
 
 footer {
-  flex-shrink: 0;
+    flex-shrink: 0;
 }
 
-  
-  .overlay {
+.overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -69,15 +90,12 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-  
-  .modal {
+}
+
+.modal {
     background: white;
     padding: 2em;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     z-index: 1001;
-  }
-  
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-
+}

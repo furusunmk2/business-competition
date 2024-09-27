@@ -90,9 +90,10 @@ const Quiz = () => {
 
   return (
     <Grid container spacing={3}>
+      
       {/* 左側のクイズ一覧 */}
       <Grid item xs={4}>
-        <Typography variant="h6">クイズ一覧</Typography>
+        <Typography variant="h4">クイズ<ruby>一覧<rt>いちらん</rt></ruby></Typography>
         <List>
           {quizzes.map((q) => (
             <ListItem 
@@ -132,7 +133,7 @@ const Quiz = () => {
                 onClick={handleAnswer}
                 disabled={answered}
               >
-                答える
+                <ruby>答<rt>こた</rt></ruby>える
               </Button>
               {showExplanation && (
                 <div>
@@ -151,7 +152,7 @@ const Quiz = () => {
                   onClick={handlePreviousQuiz}
                   disabled={currentQuizId <= 1}
                 >
-                  前の問題
+                  <ruby>前<rt>まえ</rt></ruby>の<ruby>問題<rt>もんだい</rt></ruby>
                 </Button>
                 <Button
                   variant="contained"
@@ -159,7 +160,7 @@ const Quiz = () => {
                   onClick={handleNextQuiz}
                   disabled={currentQuizId >= quizzes.length}
                 >
-                  次の問題
+                  <ruby>次<rt>つぎ</rt></ruby>の<ruby>問題<rt>もんだい</rt></ruby>
                 </Button>
               </div>
             </>

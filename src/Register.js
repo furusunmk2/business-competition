@@ -34,7 +34,9 @@ const Register = () => {
   return (
     <div className="dq-modal-content">
       <Typography component="h1" variant="h5" className="dq-title" style={{ color: 'gray' }}>
-        冒険者になる
+        <ruby>
+          冒険者<rt>ぼうけんしゃ</rt>になる
+        </ruby>
       </Typography>
       <form onSubmit={handleRegister}>
         <TextField
@@ -115,7 +117,7 @@ const Register = () => {
           style={{ marginTop: '10px' ,color:"white" }}
           className="dq-button"
         >
-          登録する
+        <ruby>登録<rt>とうろく</rt>する</ruby>
         </Button>
       </form>
     </div>

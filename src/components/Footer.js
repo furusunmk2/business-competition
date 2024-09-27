@@ -15,7 +15,7 @@ const Footer = () => {
       }}
     >
       <Container maxWidth="sm">
-        <Typography variant="body1" textAlign={'center'}>© 2024 ミギカタアガリ</Typography>
+        <Typography variant="body1" textAlign={'center'} fontFamily={'"DotGothic16", cursive'}>© 2024 ミギカタアガリ</Typography>
         <Typography variant="body2" color="text.secondary" textAlign={'center'}>
           All rights reserved.
         </Typography>

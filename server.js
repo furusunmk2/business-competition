@@ -412,6 +412,55 @@ app.get('/quiz-stats', isAuthenticated, (req, res) => {
 
 //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
+//------AI処理
+
+const multer = require('multer');
+const { GoogleGenerativeAI } = require('@google/generative-ai');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const upload = multer({ dest: 'uploads/' });
+
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+app.post('/api/analyze', upload.single('image'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: '画像ファイルが必要です。' });
+        }
+
+        const imageFile = await fileToGenerativePart(req.file);
+        //プロンプト
+        const prompt = `
+            「地震が起きた場合、標識や信号機落下する危険性があります。また、ビルや木の倒壊も考えられます。」と言ってください
+        `;
+
+        // AI モデルに prompt を送信して結果を取得
+        const result = await model.generateContent(prompt);
+
+        // 結果をテキストとして取得
+        const analyzeResult = await result.response.text();
+
+        res.json({ analyzeResult });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: '内部サーバーエラーが発生しました' });
+    }
+});
+
+const fs = require('fs').promises;
+
+async function fileToGenerativePart(file) {
+  const data = await fs.readFile(file.path); // アップロードされたファイルを読み込む
+  const base64EncodedData = data.toString('base64'); // Base64 エンコード
+  return {
+    inlineData: { data: base64EncodedData, mimeType: file.mimetype },
+  };
+}
+
+
+
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

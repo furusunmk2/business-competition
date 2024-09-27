@@ -59,7 +59,7 @@ const modalStyle = {
     backgroundColor: 'rgba(246, 230, 203, 0.9)', // 半透明の背景色
     color: 'white',
     borderRadius: '10px',
-    fontFamily: '"PixelMplus", "Press Start 2P", cursive',
+    // fontFamily: '"PixelMplus", "Press Start 2P", cursive',
   },
 };
 
@@ -87,7 +87,7 @@ function TopPage({ loggedIn, handleLogout, handleLogin, setLoggedIn, setUsername
           ariaHideApp={false}
         >
           {loggedIn ? (
-            <Typography component="h1" variant="h5">ログイン済み</Typography>
+            <Typography component="h1" variant="h5">ログイン<ruby>済<rt>ず</rt></ruby>み</Typography>
           ) : (
             isRegister ? (
               <Register setUsername={setUsername} setPassword={setPassword} />
@@ -98,11 +98,12 @@ function TopPage({ loggedIn, handleLogout, handleLogin, setLoggedIn, setUsername
           <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '1rem' }}>
             {isRegister ? (
               <span style={{ color: 'gray' }}>
-                既にアカウントをお持ちですか? <Link href="#" onClick={() => setIsRegister(false)} style={{ color: 'gray',  textDecoration: 'underline' }}>ログイン</Link>
+                <ruby>既<rt>すで</rt>にアカウントをお</ruby><ruby>持<rt>も</rt>ちですか？</ruby><Link href="#" onClick={() => setIsRegister(false)} style={{ color: 'gray',  textDecoration: 'underline' }}>ログイン</Link>
               </span>
             ) : (
               <span style={{ color: 'gray' }}>
-                アカウントを持っていませんか? <Link href="#" onClick={() => setIsRegister(true)} style={{color: 'gray',  textDecoration: 'underline' }}>登録</Link>
+                <ruby>アカウントを</ruby><ruby>持<rt>も</rt>っていませんか？</ruby>
+                <Link href="#" onClick={() => setIsRegister(true)} style={{color: 'gray',  textDecoration: 'underline' }}><ruby>登録<rt>とうろく</rt></ruby></Link>
               </span>
             )}
           </Typography>

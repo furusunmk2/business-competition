@@ -22,12 +22,12 @@ const DeleteAccount = () => {
   };
 
   return (
-    <Box sx={{ padding: '2rem' }}>
+    <Box sx={{ padding: '0 23rem' }}>
       <Typography variant="h5" gutterBottom>
-        アカウントの削除
+        アカウントの<ruby>削除<rt>さくじょ</rt></ruby>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        アカウントの削除を行います。パスワードを入力してください。
+        アカウントの<ruby>削除<rt>さくじょ</rt></ruby>を<ruby>行<rt>おこな</rt></ruby>います。パスワードを<ruby>入力<rt>にゅうりょく</rt></ruby>してください。
       </Typography>
       <TextField
         label="パスワード"
@@ -42,7 +42,7 @@ const DeleteAccount = () => {
         color="secondary" 
         onClick={handleAccountDelete}
       >
-        アカウント削除
+        アカウント<ruby>削除<rt>さくじょ</rt></ruby>
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </Box>

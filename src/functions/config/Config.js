@@ -28,12 +28,12 @@ const Config = () => {
   }, []);
 
   return (
-    <Box sx={{ padding: '2rem' }}>
-      <Typography variant="h5" gutterBottom>
-        アカウント設定
+    <Box sx={{ padding: '0 19rem' }}>
+      <Typography variant="h4" gutterBottom textAlign={'center'}>
+        アカウント<ruby>設定<rt>せってい</rt></ruby>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        メールアドレスやパスワード、ニックネームの確認・変更や、アカウントの削除ができます。
+        メールアドレスやパスワード、ニックネームの<ruby>確認<rt>かくにん</rt></ruby>・<ruby>変更<rt>へんこう</rt></ruby>や、アカウントの<ruby>削除<rt>さくじょ</rt></ruby>ができます。
       </Typography>
 
       {/* Email Section */}
@@ -44,7 +44,7 @@ const Config = () => {
         <Grid item xs={12} sm={6}>
           <Typography variant="body1">{user.email}</Typography>
           <Button variant="contained" color="primary" onClick={() => navigate('/app/change-email')}>
-            メールアドレスを変更
+            メールアドレスを<ruby>変更<rt>へんこう</rt></ruby>
           </Button>
         </Grid>
       </Grid>
@@ -52,11 +52,11 @@ const Config = () => {
       {/* Password Section */}
       <Grid container sx={{ marginBottom: '1.5rem' }}>
         <Grid item xs={12} sm={3}>
-          <Typography variant="subtitle1">パスワード変更</Typography>
+          <Typography variant="subtitle1">パスワード<ruby>変更<rt>へんこう</rt></ruby></Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
         <Button variant="contained" color="primary" onClick={() => navigate('/app/change-password')}>
-          パスワードを変更
+          パスワードを<ruby>変更<rt>へんこう</rt></ruby>
         </Button>
         </Grid>
       </Grid>
@@ -69,7 +69,7 @@ const Config = () => {
         <Grid item xs={12} sm={6}>
           <Typography variant="body1">{user.nickname}</Typography>
           <Button variant="outlined" color="primary" onClick={() => navigate('/app/change-nickname')}>
-            ニックネームを編集
+            ニックネームを<ruby>編集<rt>へんしゅう</rt></ruby>
           </Button>
         </Grid>
       </Grid>
@@ -77,11 +77,11 @@ const Config = () => {
       {/* Account Deletion Section */}
       <Grid container sx={{ marginBottom: '1.5rem' }}>
         <Grid item xs={12} sm={3}>
-          <Typography variant="subtitle1">アカウント削除</Typography>
+          <Typography variant="subtitle1">アカウント<ruby>削除<rt>さくじょ</rt></ruby></Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
         <Button variant="contained" color="secondary" onClick={() => navigate('/app/delete-account')}>
-            アカウント削除はこちら
+            アカウント<ruby>削除<rt>さくじょ</rt></ruby>はこちら
           </Button>
         </Grid>
       </Grid>

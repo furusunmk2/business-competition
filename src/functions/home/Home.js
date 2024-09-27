@@ -11,27 +11,28 @@ function Home() {
   const navigate = useNavigate();
 
   return (
-    <Box sx={{ padding: '2rem'}}>
+    <Box sx={{ padding: '0 23rem' }}>
+
       <Typography variant='h4' gutterBottom textAlign={'center'}>
-        目指せ！Disaster Master！
+      <ruby>目指<rt>めざ</rt>せ！Disaster Master</ruby>
       </Typography>
       
       {/* 学習達成率バー */}
       <Box sx={{ my: 2 }}>
         <LinearProgress variant="determinate" value={achievementRate} sx={{ height: '20px', borderRadius: '10px' }} />
-        <Typography>学習達成率: {achievementRate}%</Typography>
+        <Typography><ruby>学習達成率<rt>がくしゅうたっせいりつ</rt></ruby>: {achievementRate}%</Typography>
       </Box>
 
       {/* クイズ正答率バー */}
       <Box sx={{ my: 2 }}>
         <LinearProgress variant="determinate" value={quizAccuracyRate} sx={{ height: '20px', borderRadius: '10px' }} />
-        <Typography>クイズ正答率: {quizAccuracyRate}%</Typography>
+        <Typography>クイズ<ruby>正答率<rt>せいとうりつ</rt></ruby>: {quizAccuracyRate}%</Typography>
       </Box>
 
       {/* 各ページへのリンクボタン */}
       <Box sx={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
         <Button variant="contained" color="primary" onClick={() => navigate('/app/learning')}>
-          学習
+          <ruby>学習<rt>がくしゅう</rt></ruby>
         </Button>
         <Button variant="contained" color="primary" onClick={() => navigate('/app/quiz')}>
           クイズ
@@ -40,10 +41,10 @@ function Home() {
           シミュレーション
         </Button>
         <Button variant="contained" color="primary" onClick={() => navigate('/app/ai')}>
-          AI画像分析
+          AI<ruby>画像分析<rt>がぞうぶんせき</rt></ruby>
         </Button>
         <Button variant="contained" color="primary" onClick={() => navigate('/app/config')}>
-          設定
+          <ruby>設定<rt>せってい</rt></ruby>
         </Button>
       </Box>
 
@@ -56,7 +57,7 @@ function Home() {
           variant="contained"
           color="secondary"
         >
-          内閣府の防災情報
+          <ruby>内閣府<rt>ないかくふ</rt></ruby>の<ruby>防災情報<rt>ぼうさいじょうほう</rt></ruby>
         </Button>
         <Button
           href="https://www.jma.go.jp/jma/menu/menuflash.html"
@@ -65,11 +66,11 @@ function Home() {
           variant="contained"
           color="secondary"
         >
-          気象庁の災害情報
+          <ruby>気象庁<rt>きしょうちょう</rt></ruby>の<ruby>災害情報<rt>さいがいじょうほう</rt></ruby>
         </Button>
       </Box>
       <Typography sx={{textAlign: 'center'}}>
-        <img src='/backgroundimage.png' alt='' width={448} height={256} />
+        <img src='/familly.png' alt='' width={448} height={256} />
       </Typography>
     </Box>
   );

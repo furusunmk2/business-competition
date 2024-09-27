@@ -59,7 +59,7 @@ const Learning = () => {
     <Grid container spacing={3}>
       {/* 左側の学習ページ一覧 */}
       <Grid item xs={4}>
-        <Typography variant="h6">学習ページ一覧</Typography>
+        <Typography variant="h4"><ruby>学習<rt>がくしゅう</rt></ruby>ページ<ruby>一覧<rt>いちらん</rt></ruby></Typography>
         <List>
           {materials.map((material, index) => (
             <ListItem 
@@ -87,7 +87,7 @@ const Learning = () => {
                   color="secondary"
                   onClick={handleLearned}
                 >
-                  学習した！
+                  <ruby>学習<rt>がくしゅう</rt></ruby>した！
                 </Button>
               </div>
               <div>
@@ -96,14 +96,14 @@ const Learning = () => {
                   onClick={handlePrevious}
                   disabled={currentMaterialIndex === 0}
                 >
-                  前のページ
+                  <ruby>前<rt>まえ</rt></ruby>のページ
                 </Button>
                 <Button
                   variant="contained"
                   onClick={handleNext}
                   disabled={currentMaterialIndex >= materials.length - 1}
                 >
-                  次のページ
+                  <ruby>次<rt>つぎ</rt></ruby>のページ
                 </Button>
               </div>
               

@@ -18,12 +18,12 @@ const ChangeNickname = () => {
   };
 
   return (
-    <Box sx={{ padding: '2rem' }}>
+    <Box sx={{ padding: '0 23rem' }}>
       <Typography variant="h5" gutterBottom>
-        ニックネームの変更
+        ニックネームの<ruby>変更<rt>へんこう</rt></ruby>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        ニックネームの変更を行います。新しいニックネームを入力してください。
+        ニックネームの<ruby>変更<rt>へんこう</rt></ruby>を<ruby>行<rt>おこな</rt></ruby>います。<ruby>新<rt>あたら</rt></ruby>しいニックネームを<ruby>入力<rt>にゅうりょく</rt></ruby>してください。
       </Typography>
       <TextField
         label="新しいニックネーム"
@@ -37,7 +37,7 @@ const ChangeNickname = () => {
         color="primary" 
         onClick={handleNicknameChange}
       >
-        変更する
+        <ruby>変更<rt>へんこう</rt></ruby>する
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </Box>

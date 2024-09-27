@@ -19,12 +19,12 @@ const ChangePassword = () => {
   };
 
   return (
-    <Box sx={{ padding: '2rem' }}>
+    <Box sx={{ padding: '0 23rem' }}>
       <Typography variant="h5" gutterBottom>
-        パスワードの変更
+        パスワードの<ruby>変更<rt>へんこう</rt></ruby>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        パスワードの変更を行います。現在のパスワードと新しいパスワードを入力してください。
+        パスワードの<ruby>変更<rt>へんこう</rt></ruby>を<ruby>行<rt>おこな</rt></ruby>います。<ruby>現在<rt>げんざい</rt></ruby>のパスワードと<ruby>新<rt>あたら</rt></ruby>しいパスワードを<ruby>入力<rt>にゅうりょく</rt></ruby>してください。
       </Typography>
       <TextField
         label="現在のパスワード"
@@ -47,7 +47,7 @@ const ChangePassword = () => {
         color="primary" 
         onClick={handlePasswordChange}
       >
-        変更する
+        <ruby>変更<rt>へんこう</rt></ruby>する
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </Box>

@@ -18,12 +18,12 @@ const ChangeEmail = () => {
   };
 
   return (
-    <Box sx={{ padding: '2rem' }}>
+    <Box sx={{ padding: '0 23rem' }}>
       <Typography variant="h5" gutterBottom>
-        メールアドレスの変更
+        メールアドレスの<ruby>変更<rt>へんこう</rt></ruby>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        メールアドレスの変更を行います。新しいメールアドレスを入力してください。
+        メールアドレスの<ruby>変更<rt>へんこう</rt></ruby>を<ruby>行<rt>おこな</rt></ruby>います。<ruby>新<rt>あたら</rt></ruby>しいメールアドレスを<ruby>入力<rt>にゅうりょく</rt></ruby>してください。
       </Typography>
       <TextField
         label="新しいメールアドレス"
@@ -37,7 +37,7 @@ const ChangeEmail = () => {
         color="primary" 
         onClick={handleEmailChange}
       >
-        変更する
+        <ruby>変更<rt>へんこう</rt></ruby>する
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </Box>

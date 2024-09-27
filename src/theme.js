@@ -20,7 +20,9 @@ const theme = createTheme({
       main: '#78ABA8',
     },
   },
-
+  typography: {
+    fontFamily: 'DotGothic16, sans-serif', // 日本語フォントを指定
+  },
 });
 
 export default theme;

@@ -31,8 +31,7 @@ function Login({ setLoggedIn }) {
 
   return (
     <Container>
-      <Typography component="h1" variant="h5" className="dq-title" style={{ color: 'gray' }}>
-          冒険を続ける
+      <Typography component="h1" variant="h5" className="dq-title" style={{ color: 'gray' }}><ruby>冒険<rt>ぼうけん</rt>を</ruby><ruby>続<rt>つづ</rt>ける</ruby>
       </Typography>
       <TextField
         label="ユーザーネーム or メールアドレス"
