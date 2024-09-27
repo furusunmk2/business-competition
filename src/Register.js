@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
+import './App.css'
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -15,7 +16,7 @@ const Register = () => {
       const response = await axios.post('http://localhost:3001/register', { username, email, password, nickname});
       console.log(response.data);
       if (response.status === 200) {
-        alert('Registration successful');
+        alert('アカウント登録に成功しました。');
         
 
       } else {
@@ -32,7 +33,7 @@ const Register = () => {
   };
 
   return (
-    <div className="dq-modal-content">
+    <div className='japanese-text'>
       <Typography component="h1" variant="h5" className="dq-title" style={{ color: 'gray' }}>
         <ruby>
           冒険者<rt>ぼうけんしゃ</rt>になる
@@ -115,7 +116,7 @@ const Register = () => {
           variant="contained"
           color="primary"
           style={{ marginTop: '10px' ,color:"white" }}
-          className="dq-button"
+          className='japanese-text'
         >
         <ruby>登録<rt>とうろく</rt>する</ruby>
         </Button>

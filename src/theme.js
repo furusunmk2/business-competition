@@ -21,7 +21,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'DotGothic16, sans-serif', // 日本語フォントを指定
+    fontFamily: 'M PLUS 1, sans-serif', // 新しいフォントと日本語フォントを指定
   },
 });
 

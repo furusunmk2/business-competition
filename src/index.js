@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './index.css';
+import './App.css';
 import App from './App';
 import TopPage from './TopPage';
 import Register from './Register';

@@ -14,6 +14,10 @@ const Quiz = () => {
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
+    document.title = `問題`;
+  });
+
+  useEffect(() => {
     // Fetch session info
     axios.get('http://localhost:3001/check-session')
       .then(response => {
@@ -89,7 +93,7 @@ const Quiz = () => {
   };
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} className='japanese-text'>
       
       {/* 左側のクイズ一覧 */}
       <Grid item xs={4}>
@@ -109,7 +113,7 @@ const Quiz = () => {
       </Grid>
 
       {/* 右側のクイズ詳細 */}
-      <Grid item xs={8}>
+      <Grid item xs={8} className='japanese-text'>
         <Box sx={{ padding: '2rem' }}>
           {quiz && (
             <>
@@ -132,6 +136,7 @@ const Quiz = () => {
                 color="secondary"
                 onClick={handleAnswer}
                 disabled={answered}
+                className='japanese-text'
               >
                 <ruby>答<rt>こた</rt></ruby>える
               </Button>
@@ -151,6 +156,7 @@ const Quiz = () => {
                   color="primary"
                   onClick={handlePreviousQuiz}
                   disabled={currentQuizId <= 1}
+                  className='japanese-text'
                 >
                   <ruby>前<rt>まえ</rt></ruby>の<ruby>問題<rt>もんだい</rt></ruby>
                 </Button>
@@ -159,6 +165,7 @@ const Quiz = () => {
                   color="primary"
                   onClick={handleNextQuiz}
                   disabled={currentQuizId >= quizzes.length}
+                  className='japanese-text'
                 >
                   <ruby>次<rt>つぎ</rt></ruby>の<ruby>問題<rt>もんだい</rt></ruby>
                 </Button>

@@ -25,7 +25,7 @@ const useLearningStats = () => {
   useEffect(() => {
     // Calculate achievement rate once we have both total and learned materials
     if (totalMaterials > 0) {
-      setAchievementRate(((learnedMaterials / totalMaterials) * 100).toFixed(2));
+      setAchievementRate(((learnedMaterials / totalMaterials) * 100).toFixed(0));
     }
   }, [totalMaterials, learnedMaterials]);
 

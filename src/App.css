@@ -7,6 +7,9 @@
 /* Google Fontsのインポート */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@100..900&display=swap');
+
 
 /* 全体のフォント設定 */
 body {
@@ -15,12 +18,12 @@ body {
 
 /* 英語専用のスタイル */
 .english-text {
-  font-family: 'Press Start 2P', 'Arial', sans-serif; /* 英語用フォント */
+    font-family: 'Press Start 2P', 'Arial', sans-serif; /* 新しい英語用フォント */
 }
 
 /* 日本語専用のスタイル */
 .japanese-text {
-  font-family: 'DotGothic16', 'Arial', sans-serif; /* 日本語用フォント */
+  font-family: 'M PLUS 1', 'Arial', sans-serif; /* 日本語用フォント */
 }
 
 
@@ -99,3 +102,23 @@ footer {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     z-index: 1001;
 }
+
+.ruby {
+    font-family: 'M PLUS 1', sans-serif;
+    visibility: hidden;
+    font-size: 0.7em; /* ルビのサイズを少し小さく調整 */
+    position: absolute;
+    top: -1.2em;  /* ルビを少し上に */
+    left: 0;
+  }
+  
+  /* ホバー時にルビを表示 */
+  .ruby-container {
+    position: relative; /* 親要素を relative にして absolute 位置指定を可能に */
+    display: inline-block;
+  }
+  
+  .ruby-container:hover .ruby {
+    visibility: visible;  /* ホバー時にルビを表示 */
+  }
+  

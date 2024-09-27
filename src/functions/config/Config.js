@@ -8,6 +8,10 @@ const Config = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = `設定`;
+  });
+
+  useEffect(() => {
     // Fetch current session user data
     axios.get('http://localhost:3001/check-session')
       .then((response) => {
@@ -28,12 +32,13 @@ const Config = () => {
   }, []);
 
   return (
-    <Box sx={{ padding: '0 19rem' }}>
+    <Box sx={{ padding: '0 19rem' }} className='japanese-text'>
       <Typography variant="h4" gutterBottom textAlign={'center'}>
         アカウント<ruby>設定<rt>せってい</rt></ruby>
       </Typography>
       <Typography variant="body1" gutterBottom>
-        メールアドレスやパスワード、ニックネームの<ruby>確認<rt>かくにん</rt></ruby>・<ruby>変更<rt>へんこう</rt></ruby>や、アカウントの<ruby>削除<rt>さくじょ</rt></ruby>ができます。
+        メールアドレスやパスワード、ニックネームの<ruby>確認<rt>かくにん</rt></ruby>・<ruby>変更<rt>へんこう</rt></ruby>や、アカウントの<ruby>削除<rt>さくじょ</rt></ruby>ができます。<br></br>
+        <ruby>保護者<rp>(</rp><rt>ほごしゃ</rt><rp>)</rp></ruby>や<ruby>先生<rp>(</rp><rt>せんせい</rt><rp>)</rp></ruby>と<ruby>一緒<rp>(</rp><rt>いっしょ</rt><rp>)</rp></ruby>に<ruby>操作<rp>(</rp><rt>そうさ</rt><rp>)</rp></ruby>してください。
       </Typography>
 
       {/* Email Section */}
@@ -43,7 +48,7 @@ const Config = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="body1">{user.email}</Typography>
-          <Button variant="contained" color="primary" onClick={() => navigate('/app/change-email')}>
+          <Button variant="contained" color="primary" onClick={() => navigate('/app/change-email')} className='japanese-text'>
             メールアドレスを<ruby>変更<rt>へんこう</rt></ruby>
           </Button>
         </Grid>
@@ -55,7 +60,7 @@ const Config = () => {
           <Typography variant="subtitle1">パスワード<ruby>変更<rt>へんこう</rt></ruby></Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Button variant="contained" color="primary" onClick={() => navigate('/app/change-password')}>
+        <Button variant="contained" color="primary" onClick={() => navigate('/app/change-password')} className='japanese-text'>
           パスワードを<ruby>変更<rt>へんこう</rt></ruby>
         </Button>
         </Grid>
@@ -68,7 +73,7 @@ const Config = () => {
         </Grid>
         <Grid item xs={12} sm={6}>
           <Typography variant="body1">{user.nickname}</Typography>
-          <Button variant="outlined" color="primary" onClick={() => navigate('/app/change-nickname')}>
+          <Button variant="outlined" color="primary" onClick={() => navigate('/app/change-nickname')} className='japanese-text'>
             ニックネームを<ruby>編集<rt>へんしゅう</rt></ruby>
           </Button>
         </Grid>
@@ -80,7 +85,7 @@ const Config = () => {
           <Typography variant="subtitle1">アカウント<ruby>削除<rt>さくじょ</rt></ruby></Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-        <Button variant="contained" color="secondary" onClick={() => navigate('/app/delete-account')}>
+        <Button variant="contained" color="secondary" onClick={() => navigate('/app/delete-account')} className='japanese-text'>
             アカウント<ruby>削除<rt>さくじょ</rt></ruby>はこちら
           </Button>
         </Grid>

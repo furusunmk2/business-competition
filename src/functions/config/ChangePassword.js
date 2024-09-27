@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, TextField, Typography, Box } from '@mui/material';
 import axios from 'axios';
 
@@ -6,6 +6,10 @@ const ChangePassword = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    document.title = `パスワード変更`;
+  });
 
   const handlePasswordChange = () => {
     axios.post('http://localhost:3001/api/change-password', { currentPassword, newPassword })
@@ -19,7 +23,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <Box sx={{ padding: '0 23rem' }}>
+    <Box sx={{ padding: '0 23rem' }} className='japanese-text'>
       <Typography variant="h5" gutterBottom>
         パスワードの<ruby>変更<rt>へんこう</rt></ruby>
       </Typography>
@@ -46,6 +50,7 @@ const ChangePassword = () => {
         variant="contained" 
         color="primary" 
         onClick={handlePasswordChange}
+        className='japanese-text'
       >
         <ruby>変更<rt>へんこう</rt></ruby>する
       </Button>

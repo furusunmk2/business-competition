@@ -1,12 +1,16 @@
 //aaa
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, TextField, Typography, Box } from '@mui/material';
 import axios from 'axios';
 
 const ChangeEmail = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    document.title = `メールアドレス変更`;
+  });
 
   const handleEmailChange = () => {
     axios.post('http://localhost:3001/api/change-email', { email })
@@ -20,7 +24,7 @@ const ChangeEmail = () => {
   };
 
   return (
-    <Box sx={{ padding: '0 23rem' }}>
+    <Box sx={{ padding: '0 23rem' }} className='japanese-text'>
       <Typography variant="h5" gutterBottom>
         メールアドレスの<ruby>変更<rt>へんこう</rt></ruby>
       </Typography>
@@ -38,6 +42,7 @@ const ChangeEmail = () => {
         variant="contained" 
         color="primary" 
         onClick={handleEmailChange}
+        className='japanese-text'
       >
         <ruby>変更<rt>へんこう</rt></ruby>する
       </Button>

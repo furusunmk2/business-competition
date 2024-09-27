@@ -49,7 +49,7 @@ app.post('/login', (req, res) => {
 
     if (result.length === 0) {
       console.log('Invalid username/email or password: no user found');
-      return res.status(401).json({ message: 'Invalid username/email or password' });
+      return res.status(401).json({ message: '不正なログイン情報です。' });
     }
 
     const user = result[0];
@@ -177,7 +177,7 @@ app.post('/api/change-password', isAuthenticated, (req, res) => {
   const userId = req.session.user.id;
 
   if (!currentPassword || !newPassword) {
-    return res.status(400).send('Current and new password are required');
+    return res.status(400).send('パスワードを入力してください。');
   }
 
   // 現在のパスワードを取得
@@ -190,7 +190,7 @@ app.post('/api/change-password', isAuthenticated, (req, res) => {
 
     // 現在のパスワードが正しいか確認
     if (!bcrypt.compareSync(currentPassword, storedPassword)) {
-      return res.status(401).send('Current password is incorrect');
+      return res.status(401).send('現在のパスワードが間違っています。');
     }
 
     // 新しいパスワードをハッシュ化
@@ -211,7 +211,7 @@ app.post('/api/delete-account', isAuthenticated, (req, res) => {
   const userId = req.session.user.id;
 
   if (!currentPassword) {
-    return res.status(400).send('Current password is required');
+    return res.status(400).send('パスワードを入力してください。');
   }
 
   // 現在のパスワードを取得
@@ -224,7 +224,7 @@ app.post('/api/delete-account', isAuthenticated, (req, res) => {
 
     // 現在のパスワードが正しいか確認
     if (!bcrypt.compareSync(currentPassword, storedPassword)) {
-      return res.status(401).send('Current password is incorrect');
+      return res.status(401).send('正しいパスワードを入力してください。');
     }
 
     // アカウントを削除
@@ -403,7 +403,7 @@ app.get('/quiz-stats', isAuthenticated, (req, res) => {
         totalQuestions: totalQuestions[0].total,
         totalAnswers: userStats[0].totalAnswers,
         correctAnswers: userStats[0].correctAnswers,
-        accuracyRate: accuracyRate.toFixed(2)
+        accuracyRate: accuracyRate.toFixed(0)
       });
     });
   });
@@ -433,7 +433,7 @@ app.post('/api/analyze', upload.single('image'), async (req, res) => {
         const imageFile = await fileToGenerativePart(req.file);
         //プロンプト
         const prompt = `
-            「地震が起きた場合、標識や信号機落下する危険性があります。また、ビルや木の倒壊も考えられます。」と言ってください
+            「地震が発生した場合、標識が倒れる危険性があります。また、建物の窓ガラスが割れて落下する可能性も高いので、十分に注意してください。」と言ってください
         `;
 
         // AI モデルに prompt を送信して結果を取得

@@ -3,7 +3,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './functions/home/Home';
 import AI from './functions/AI/AI';
-import Simulation from './functions/Simulation';
+import Simulation from './functions/simulation/Simulation';
 import Learning from './functions/learning/Learning';
 import Quiz from './functions/quiz/Quiz';
 import Header from './components/Header';

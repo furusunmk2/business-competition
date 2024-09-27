@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Link, Tooltip } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
-import './Header.css';  // CSSを必ず読み込む
+import '../App.css';  // CSSを必ず読み込む
 import LogoutButton from '../LogoutButton';
 import { useNavigate } from 'react-router-dom';
 

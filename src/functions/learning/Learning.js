@@ -8,6 +8,10 @@ const Learning = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    document.title = `学習`;
+  });
+
+  useEffect(() => {
     // Fetch learning materials from the backend
     axios.get('http://localhost:3001/api/learning-materials')
       .then(response => setMaterials(response.data))
@@ -18,6 +22,7 @@ const Learning = () => {
       .then(response => setUser(response.data.user))
       .catch(error => console.error('Error checking session:', error));
   }, []);
+  
 
   const handleNext = () => {
     setCurrentMaterialIndex((prevIndex) => 
@@ -56,7 +61,7 @@ const Learning = () => {
   };
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} className='japanese-text'>
       {/* 左側の学習ページ一覧 */}
       <Grid item xs={4}>
         <Typography variant="h4"><ruby>学習<rt>がくしゅう</rt></ruby>ページ<ruby>一覧<rt>いちらん</rt></ruby></Typography>
@@ -75,7 +80,7 @@ const Learning = () => {
       </Grid>
 
       {/* 右側の学習ページ詳細 */}
-      <Grid item xs={8}>
+      <Grid item xs={8} className='japanese-text'>
         <Box sx={{ padding: '2rem' }}>
           {currentMaterial ? (
             <>
@@ -86,6 +91,7 @@ const Learning = () => {
                   variant="contained"
                   color="secondary"
                   onClick={handleLearned}
+                  className='japanese-text'
                 >
                   <ruby>学習<rt>がくしゅう</rt></ruby>した！
                 </Button>
@@ -95,6 +101,7 @@ const Learning = () => {
                   variant="contained"
                   onClick={handlePrevious}
                   disabled={currentMaterialIndex === 0}
+                  className='japanese-text'
                 >
                   <ruby>前<rt>まえ</rt></ruby>のページ
                 </Button>
@@ -102,6 +109,7 @@ const Learning = () => {
                   variant="contained"
                   onClick={handleNext}
                   disabled={currentMaterialIndex >= materials.length - 1}
+                  className='japanese-text'
                 >
                   <ruby>次<rt>つぎ</rt></ruby>のページ
                 </Button>

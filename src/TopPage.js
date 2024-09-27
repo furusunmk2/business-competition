@@ -1,13 +1,13 @@
 // TopPage.js
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Modal from 'react-modal';
 import { ThemeProvider } from '@mui/material/styles';
 import { styled, keyframes } from '@mui/system';
 import { Typography, Link } from '@mui/material';
 import Login from './Login';
 import Register from './Register';
-import './TopPage.css';
+import './App.css';
 import theme from './theme';
 
 
@@ -76,10 +76,14 @@ function TopPage({ loggedIn, handleLogout, handleLogin, setLoggedIn, setUsername
     setIsRegister(false);
   };
 
+  useEffect(() => {
+    document.title = `トップページ`;
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <AppContainer>
-        <Title onClick={handleTitleClick}style={{color:"white"}} >Disaster Master</Title>
+        <Title onClick={handleTitleClick}style={{color:"white"}} className='english-text' >Disaster Master</Title>
         <Modal
           isOpen={modalIsOpen}
           onRequestClose={closeModal}
@@ -95,7 +99,7 @@ function TopPage({ loggedIn, handleLogout, handleLogin, setLoggedIn, setUsername
               <Login handleLogin={handleLogin} setLoggedIn={setLoggedIn} setUsername={setUsername} setPassword={setPassword} />
             )
           )}
-          <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '1rem' }}>
+          <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '1rem' }} className='japanese-text'>
             {isRegister ? (
               <span style={{ color: 'gray' }}>
                 <ruby>既<rt>すで</rt>にアカウントをお</ruby><ruby>持<rt>も</rt>ちですか？</ruby><Link href="#" onClick={() => setIsRegister(false)} style={{ color: 'gray',  textDecoration: 'underline' }}>ログイン</Link>

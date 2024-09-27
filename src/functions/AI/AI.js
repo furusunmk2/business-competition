@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, Button, Input, Grid, Paper } from '@mui/material';
 
 function AI() {
@@ -6,6 +6,10 @@ function AI() {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [analysisResult, setAnalysisResult] = useState('');
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    document.title = `AI画像分析`;
+  });
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -48,13 +52,13 @@ function AI() {
   };
 
   return (
-    <Box sx={{ padding: '0 25rem' }}>
-      <Typography variant="h4" gutterBottom textAlign={'center'}>
+    <Box sx={{ padding: '0 25rem' }} className='japanese-text'>
+      <Typography variant="h4" gutterBottom textAlign={'center'} >
         AI<ruby>画像分析<rt>がぞうぶんせき</rt></ruby>
       </Typography>
 
       <Typography variant="body1" gutterBottom>
-        <ruby>画像<rt>がぞう</rt></ruby>をアップロードして、AIによる<ruby>分析結果<rt>ぶんせきけっか</rt></ruby>を<ruby>確認<rt>かくにん</rt></ruby>してください。
+        <ruby>画像<rp>(</rp><rt>がぞう</rt><rp>)</rp></ruby>を<ruby>選<rp>(</rp><rt>えら</rt><rp>)</rp></ruby>んで、<ruby>危険<rp>(</rp><rt>きけん</rt><rp>)</rp></ruby>な<ruby>場所<rp>(</rp><rt>ばしょ</rt><rp>)</rp></ruby>を<ruby>教<rp>(</rp><rt>おし</rt><rp>)</rp></ruby>えてもらおう。
       </Typography>
 
       <Grid container spacing={2} alignItems="center">
@@ -71,15 +75,16 @@ function AI() {
             color="primary"
             onClick={handleAnalyze}
             disabled={!selectedFile || loading}
+            className='japanese-text'
           >
-            {loading ? '分析中...' : '分析開始'}
+            {loading ? '分析中...' : '分析'}
           </Button>
         </Grid>
       </Grid>
 
       {previewUrl && (
         <Box sx={{ marginTop: '2rem', textAlign: 'center' }}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h5" gutterBottom>
             <ruby>選択<rt>せんたく</rt></ruby>された<ruby>画像<rt>がぞう</rt></ruby>
           </Typography>
           <img

@@ -1,5 +1,3 @@
-// Menu.js
-
 import React, { useState } from 'react';
 import { Drawer, List, ListItem, ListItemText, IconButton } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
@@ -7,11 +5,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const Menu = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState(null); // ホバー状態を追跡するためのステート
 
   const toggleDrawer = (open) => (event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
-
     }
     setIsOpen(open);
   };
@@ -21,14 +19,22 @@ const Menu = () => {
   const handleNavigation = (path) => {
     navigate(path);
   };
-  return (
 
+  const menuItems = [
+    { path: '/app/home', label: 'ホーム', hiragana: 'ほーむ' },
+    { path: '/app/learning', label: '学習', hiragana: 'がくしゅう' },
+    { path: '/app/quiz', label: '問題', hiragana: 'もんだい' },
+    { path: '/app/simulation', label: 'シミュレーション', hiragana: 'しみゅれーしょん' },
+    { path: '/app/ai', label: '分析', hiragana: 'ぶんせき' },
+    { path: '/app/config', label: '設定', hiragana: 'せってい' },
+  ];
+
+  return (
     <div>
       <IconButton
         edge="start"
         color="inherit"
         aria-label="menu"
-        margi
         onClick={toggleDrawer(true)}
         style={{
           marginTop: '50px',
@@ -43,24 +49,20 @@ const Menu = () => {
         onClose={toggleDrawer(false)}
       >
         <List onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)} style={{ marginTop: '50px' }} >
-        <ListItem button onClick={() => handleNavigation('/app/home')}>
-          <ListItemText primary="ホーム" />
-        </ListItem>
-        <ListItem button onClick={() => handleNavigation('/app/learning')}>
-          <ListItemText primary="学習" />
-        </ListItem>
-        <ListItem button onClick={() => handleNavigation('/app/quiz')}>
-          <ListItemText primary="クイズ" />
-        </ListItem>
-        <ListItem button onClick={() => handleNavigation('/app/simulation')}>
-          <ListItemText primary="シミュレーション" />
-        </ListItem>
-        <ListItem button onClick={() => handleNavigation('/app/ai')}>
-          <ListItemText primary="AI画像分析" />
-        </ListItem>
-        <ListItem button onClick={() => handleNavigation('/app/config')}>
-          <ListItemText primary="設定" />
-        </ListItem>
+          {menuItems.map((item, index) => (
+            <ListItem
+              button
+              key={index}
+              onClick={() => handleNavigation(item.path)}
+              onMouseEnter={() => setHoveredItem(index)} // ホバー開始
+              onMouseLeave={() => setHoveredItem(null)}   // ホバー終了
+              className='japanese-text'
+            >
+              <ListItemText
+                primary={hoveredItem === index ? item.hiragana : item.label} // ホバー状態で表示を切り替え
+              />
+            </ListItem>
+          ))}
         </List>
       </Drawer>
     </div>

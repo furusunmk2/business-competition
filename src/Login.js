@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Container, TextField, Button, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './App.css'
 axios.defaults.withCredentials = true; // すべてのリクエストでクレデンシャルを含む
 
 
@@ -30,7 +31,7 @@ function Login({ setLoggedIn }) {
   };
 
   return (
-    <Container>
+    <Container className='japanese-text'>
       <Typography component="h1" variant="h5" className="dq-title" style={{ color: 'gray' }}><ruby>冒険<rt>ぼうけん</rt>を</ruby><ruby>続<rt>つづ</rt>ける</ruby>
       </Typography>
       <TextField
@@ -65,6 +66,7 @@ function Login({ setLoggedIn }) {
         InputProps={{
           style: { backgroundColor: 'white'}, // 入力フィールドの背景を白くする
         }}
+        className='japanese-text'
       >
         ログイン
       </Button>
