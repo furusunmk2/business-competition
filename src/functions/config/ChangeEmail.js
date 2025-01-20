@@ -1,4 +1,4 @@
-//aaa
+//ChangeEmail.js
 
 import React, { useState, useEffect } from 'react';
 import { Button, TextField, Typography, Box } from '@mui/material';
@@ -10,9 +10,16 @@ const ChangeEmail = () => {
 
   useEffect(() => {
     document.title = `メールアドレス変更`;
-  });
+  }, []);
 
   const handleEmailChange = () => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(email)) {
+      window.alert("正しいメールアドレス形式を入力してください (例: xxx@yyy.com)");
+      return;
+    }
+
     axios.post('http://localhost:3001/api/change-email', { email })
       .then(response => {
         setMessage('メールアドレスの更新に成功しました。');
@@ -48,7 +55,6 @@ const ChangeEmail = () => {
       </Button>
       {message && <Typography variant="body1">{message}</Typography>}
     </Box>
-
   );
 };
 
