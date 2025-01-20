@@ -424,40 +424,75 @@ const upload = multer({ dest: 'uploads/' });
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-app.post('/api/analyze', upload.single('image'), async (req, res) => {
-    try {
-        if (!req.file) {
-            return res.status(400).json({ error: '画像ファイルが必要です。' });
-        }
-
-        const imageFile = await fileToGenerativePart(req.file);
-        //プロンプト
-        const prompt = `
-            「地震が発生した場合、標識が倒れる危険性があります。また、建物の窓ガラスが割れて落下する可能性も高いので、十分に注意してください。」と言ってください
-        `;
-
-        // AI モデルに prompt を送信して結果を取得
-        const result = await model.generateContent(prompt);
-
-        // 結果をテキストとして取得
-        const analyzeResult = await result.response.text();
-
-        res.json({ analyzeResult });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: '内部サーバーエラーが発生しました' });
-    }
-});
-
 const fs = require('fs').promises;
 
-async function fileToGenerativePart(file) {
-  const data = await fs.readFile(file.path); // アップロードされたファイルを読み込む
-  const base64EncodedData = data.toString('base64'); // Base64 エンコード
-  return {
-    inlineData: { data: base64EncodedData, mimeType: file.mimetype },
-  };
-}
+app.post('/api/analyze', upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: '画像ファイルが必要です。' });
+    }
+
+    // 画像ファイルのデータを取得し、Base64にエンコード
+    const fileBuffer = await fs.readFile(req.file.path);
+    const base64Image = fileBuffer.toString('base64');
+
+    const prompt = "写真の場所で災害が起きたらどんな危険性が考えられますか？２００文字程度でまとめてください。";
+
+    // AIモデルへのリクエストに必要なデータを準備
+    const result = await model.generateContent([
+      prompt,
+      {
+        inlineData: {
+          data: base64Image,
+          mimeType: req.file.mimetype,
+        },
+      },
+    ]);
+
+    // 解析結果を取得
+    const analyzeResult = await result.response.text();
+
+    res.json({ analyzeResult });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: '内部サーバーエラーが発生しました' });
+  }
+});
+
+// app.post('/api/analyze', upload.single('image'), async (req, res) => {
+//     try {
+//         if (!req.file) {
+//             return res.status(400).json({ error: '画像ファイルが必要です。' });
+//         }
+
+//         const imageFile = await fileToGenerativePart(req.file);
+//         //プロンプト
+//         const prompt = `
+//             「地震が発生した場合、標識が倒れる危険性があります。また、建物の窓ガラスが割れて落下する可能性も高いので、十分に注意してください。」と言ってください
+//         `;
+
+//         // AI モデルに prompt を送信して結果を取得
+//         const result = await model.generateContent(prompt);
+
+//         // 結果をテキストとして取得
+//         const analyzeResult = await result.response.text();
+
+//         res.json({ analyzeResult });
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ error: '内部サーバーエラーが発生しました' });
+//     }
+// });
+
+
+
+// async function fileToGenerativePart(file) {
+//   const data = await fs.readFile(file.path); // アップロードされたファイルを読み込む
+//   const base64EncodedData = data.toString('base64'); // Base64 エンコード
+//   return {
+//     inlineData: { data: base64EncodedData, mimeType: file.mimetype },
+//   };
+// }
 
 
 
