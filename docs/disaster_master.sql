@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: 127.0.0.1
--- 生成日時: 2024-10-28 01:44:09
+-- 生成日時: 2025-01-24 02:06:56
 -- サーバのバージョン： 10.4.32-MariaDB
 -- PHP のバージョン: 8.2.12
 
@@ -112,6 +112,13 @@ CREATE TABLE `users` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- テーブルのデータのダンプ `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `nickname`, `created_at`, `updated_at`) VALUES
+(37, 'a', 'a@a', '$2b$10$0UIFygyU00bJURdhJzmf0eKcYEG/eH6oyLoLxvNDN938HYspPqPjW', 'a', '2024-10-28 00:51:27', '2024-10-28 00:51:27');
+
 -- --------------------------------------------------------
 
 --
@@ -139,6 +146,13 @@ CREATE TABLE `user_material_views` (
   `material_id` int(11) DEFAULT NULL,
   `learned_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- テーブルのデータのダンプ `user_material_views`
+--
+
+INSERT INTO `user_material_views` (`id`, `user_id`, `material_id`, `learned_at`) VALUES
+(30, 37, 1, '2024-10-28 01:27:35');
 
 --
 -- ダンプしたテーブルのインデックス
@@ -214,7 +228,7 @@ ALTER TABLE `quiz_choices`
 -- テーブルの AUTO_INCREMENT `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- テーブルの AUTO_INCREMENT `user_answers`
@@ -226,7 +240,7 @@ ALTER TABLE `user_answers`
 -- テーブルの AUTO_INCREMENT `user_material_views`
 --
 ALTER TABLE `user_material_views`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- ダンプしたテーブルの制約
